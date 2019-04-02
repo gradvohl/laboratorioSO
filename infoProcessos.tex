@@ -1,0 +1,70 @@
+\section{Obtendo informações sobre processos}
+Existem dois comandos para obtenção de informações sobre processos: \Comando{ps} e \Comando{top}.
+
+O comando \Comando{ps} informa o status dos processos de forma sucinta. As informações que o comando \Comando{ps} apresenta são:
+
+\begin{itemize}
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}  \setlength{\parsep}{0pt}
+\item \texttt{PID}: identificador do processo;
+\item \texttt{TTY}: terminal onde o processo está sendo executado;
+\item \texttt{TIME}: tempo de processamento;
+\item \texttt{CMD}: comando instanciado.
+\end{itemize}
+
+O comando \Comando{top} é um pouco mais poderoso, pois reporta mais informações.  Entre tais informações estão:
+
+\begin{itemize}
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}  \setlength{\parsep}{0pt}
+\item tempo em que o sistema está no ar;
+\item carga média do sistema;
+\item informações da CPU:
+\begin{itemize}
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}  \setlength{\parsep}{0pt}
+\item porcentagem de tempo dedicada aos processos do usuário;
+\item porcentagem de tempo dedicada aos processos do sistema;
+\item porcentagem de tempo sem processamento (\textit{idle}).
+\end{itemize}
+\item informações sobre a memória:
+\begin{itemize}
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}  \setlength{\parsep}{0pt}
+\item memória total;
+\item memória  livre;
+\item memória  compartilhada;
+\end{itemize}
+\item informações sobre os processos:
+\begin{itemize}
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}  \setlength{\parsep}{0pt}
+\item \texttt{PID}: identificador do processo;
+\item \texttt{USER}: nome do usuário;
+\item \texttt{PRI}: prioridade;
+\item \texttt{SIZE}: tamanho do processo em kbytes;
+\item \texttt{RSS}: tamanho total de memória física do processo;
+\item \texttt{SHARE}: tamanho total de memória compartilhada;
+\item \texttt{STAT}:  estado do processo, que pode ser \texttt{S}  (\textit{sleeping}) ou \texttt{R} (\textit{running}).
+\end{itemize}
+\end{itemize}
+
+\section{Exercício}
+Utilize o comando \Comando{top} em sua máquina e tente identificar as informações providas pelo comando.
+
+\chapter{Obtendo informações sobre os processos}
+Neste capítulo, vamos verificar como obter informações sobre o próprio processo a partir dele mesmo.
+
+\section{Obtendo informações sobre o processo, via programa}
+É possível construir programas que interajam com o sistema operacional e obtenham algumas informações. Observe o código do programa a seguir:
+
+\lstinputlisting[style=MyCStyle]{./Programas/Processos/infoProcesso.c}
+
+\section{Exercício}
+Compile o programa anterior e execute-o.
+
+Antes de compilar o programa, mude para o diretório onde se encontra o arquivo  \texttt{infoProcesso.c}, com o seguinte comando:
+
+\begin{lstlisting}[style=MyBashStyle]
+cd Processos
+\end{lstlisting}
+
+Para compilar o programa utilize o comando a seguir:
+\begin{lstlisting}[style=MyBashStyle]
+gcc infoProcesso.c -o infoProcesso
+\end{lstlisting}

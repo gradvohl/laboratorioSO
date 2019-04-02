@@ -1,0 +1,39 @@
+\chapter{Tratamento de Sinais}
+
+Sinais são usados para notificar um processo ou segmento de um evento particular. Pode-se comparar o tratamento de sinais com interrupções de hardware, que ocorrem quando um subsistema de hardware, por exemplo uma interface de E/S de disco, gera uma interrupção para o processador quando a E/S é concluída.
+
+Este evento, por sua vez, faz com que o processador chame um tratador de interrupções. Assim, o processamento subsequente pode ser feito no sistema operacional com base na fonte e da causa da interrupção.
+
+Observe como isso pode ser feito no programa \texttt{sinais.c} a seguir
+
+\lstinputlisting[style=MyCStyle]{./Programas/Sinais/sinais.c}
+
+\section{Exercício}
+ Antes de compilar o programa, mude para o diretório onde se encontra o arquivo \texttt{sinais.c}, com o seguinte comando:
+
+\begin{lstlisting}[style=MyBashStyle]
+cd ../Sinais
+\end{lstlisting}
+
+Agora para compilar o programa utilize o comando a seguir:
+\begin{lstlisting}[style=MyBashStyle]
+gcc sinais.c -o sinais.o 
+\end{lstlisting}
+
+Depois de compilado, será necessário abrir uma segunda janela do terminal. Na primeira janela, você executará o programa \texttt{./sinais.o}. 
+
+Depois que o programa entrar em execução, tente pressionar as teclas \keys{\ctrl + c} para ver se o programa termina.
+
+Para encerrar de fato o programa, na segunda janela, utilize o comando \Comando{kill} para enviar um sinal de término para o programa. Para isso, utilize o comando a seguir:
+
+\begin{lstlisting}[style=MyBashStyle]
+kill -QUIT <pid>
+\end{lstlisting}
+
+\noindent onde \texttt{<pid>} é o identificador do processo na primeira janela.
+
+Importante: para saber o identificador do processo \texttt{./sinais} que está em execução na primeira janela, use o comando a seguir:
+
+\begin{lstlisting}[style=MyBashStyle]
+ps -ef | grep sinais.o
+\end{lstlisting}

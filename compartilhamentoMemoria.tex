@@ -1,0 +1,40 @@
+\chapter{Compartilhamento de memória}
+
+Conforme discutido em sala de aula, é possível fazer com que dois ou mais processos compartilhem memória. Essa é uma forma para fazer com que dois processos possam se comunicar.
+
+\section{Primitivas para compartilhamento de memória}
+As primitivas usadas para fazer o compartilhamento e acesso são:
+\begin{itemize}
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}  \setlength{\parsep}{0pt}
+\item \texttt{shmget}: retorna o identificador do segmento de memória compartilhado;
+\item \texttt{shmat}: anexa o segmento de memória compartilhado ao espaço de endereçamento do processo;
+\item \texttt{shmdt}: desanexa o segmento de memória compartilhado ao espaço de endereçamento do processo.
+\end{itemize}
+
+Observe o que os programas a seguir fazem. O primeiro é o programa \texttt{shm\_serv.c} que disponibiliza um segmento de memória. O segundo é o programa \texttt{shm\_cli.c} que acessa o segmento compartilhado.
+
+\section*{\texttt{shm\_serv.c}}
+\lstinputlisting[style=MyCStyle]{./Programas/CompartMem/shm_serv.c}
+
+\newpage
+\section*{\texttt{shm\_cli.c}}
+\lstinputlisting[style=MyCStyle]{./Programas/CompartMem/shm_cli.c}
+
+\section{Exercício}
+
+Compile ambos os programas e, em seguida, execute em uma janela o programa  \texttt{shm\_serv.o} e em outra janela o programa \texttt{shm\_cli.o}.
+
+Antes de compilar o programa, mude para o diretório onde se encontram os arquivos \texttt{shm\_serv.c} e \texttt{shm\_cli.c} , com o seguinte comando:
+\begin{lstlisting}[style=MyBashStyle]
+cd ../CompartMem
+\end{lstlisting}
+
+
+Para compilar o programa utilize as linhas de comando a seguir:
+\begin{lstlisting}[style=MyBashStyle]
+gcc shm_serv.c -o shm_serv
+
+gcc shm_cli.c -o shm_cli
+\end{lstlisting}
+
+Agora, em uma das janela execute primeiro o programa \texttt{./shm\_serv.o} e, depois, na segunda janela execute o programa \texttt{./shm\_cli.o}. Veja o resultado.

@@ -1,0 +1,27 @@
+\chapter{Interação com o Sistema Operacional}
+\section{Interagindo com o sistema operacional}
+O comando básico para obter informações sobre o sistema operacional é o
+%\begin{center}  \texttt{uname -a} \end{center}
+
+\begin{lstlisting}[style=MyBashStyle]
+uname -a
+\end{lstlisting}
+
+
+
+Observe a saída desse comando:
+\begin{lstlisting}[style=outputStyle]
+Linux grid1.cna.unicamp.br 2.4.20-8 #1 Thu Mar 13 17:18:24 EST 2003 i686 athlon i386 GNU/Linux
+\end{lstlisting}
+
+Entre as informações presentes na saída desse comando estão:
+\begin{itemize}
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}  \setlength{\parsep}{0pt}
+\item o nome do sistema operacional;
+\item o nome da máquina;
+\item versão do kernel;
+\item plataforma de hardware.
+\end{itemize}
+
+\section{Exercício}
+Utilize o comando \ComandoParametros{uname}{-a} em sua máquina e tente identificar a saída do comando.

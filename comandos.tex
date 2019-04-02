@@ -1,0 +1,62 @@
+\newcommand{\Comando}[1]{{\color{blue}\texttt{#1}}}
+%
+\newcommand{\ComandoParametros}[2]{%
+\mbox{\textcolor{blue}{\texttt{#1}}%
+\xspace\textcolor{red}{\texttt{#2}}}%
+}%fim ComandoParametros
+
+\newcommand{\ComandoDoisParametros}[3]{%
+\textcolor{blue}{\texttt{\textbackslash{#1}}}%
+\textcolor{red}{\texttt{\{}}%
+\texttt{#2}%
+\textcolor{red}{\texttt{\}}}%
+\textcolor{red}{\texttt{\{}}%
+\texttt{#3}%
+\textcolor{red}{\texttt{\}}}%
+}%fim ComandoDoisParametros
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{MyCStyle}{language=C,
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{blue}{$\hookrightarrow$}\space},
+  xleftmargin=\parindent,
+  showstringspaces=false,
+  basicstyle=\linespread{.8}\footnotesize\ttfamily,
+   %identifierstyle=\color{blue},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  frame = single, 
+}
+
+\lstdefinestyle{MyBashStyle}{language=bash,
+  basicstyle=\ttfamily,
+  xleftmargin=\parindent,
+  morecomment=[s][\color{red}]{-}{\ }, 
+  morecomment=[s][\color{red}]{--}{\ },
+  morekeywords={uname,gcc,top,grep},%
+  showstringspaces=false,
+  commentstyle=\color{orange},
+  keywordstyle=\color{blue}
+}
+
+\lstdefinestyle{outputStyle}{
+    basicstyle=\footnotesize\ttfamily,
+    identifierstyle=\color{black},
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    xleftmargin=\parindent,
+    postbreak=\mbox{\textcolor{blue}{$\hookrightarrow$}\space},
+}
+

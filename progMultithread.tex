@@ -1,0 +1,40 @@
+\chapter{Programação \textit{Multithread}}
+Uma outra forma de fazer duas ou mais tarefas ao mesmo tempo é utilizado \textit{multithreads}. Conforme já discutido em sala de aula, \textit{multithreads} são diferentes linhas de execução em um processo.
+
+Existem algumas bibliotecas para trabalhar com \textit{multithreads}. Por exemplo, a POSIX \textit{Threads} (PThreads) -- que utilizaremos neste tutorial -- e a OpenMP, cujo paradigma é diferente da PThreads.
+
+Neste tutorial, serão utilizadas as seguintes primitivas  da biblioteca PThreads:
+
+\begin{itemize}
+\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}  \setlength{\parsep}{0pt}
+\item \texttt{pthread\_create()}: responsável pela criação de uma \textit{thread}.
+\item \texttt{pthread\_exit()}: responsável por retornar um valor de uma \textit{thread}.
+\item \texttt{pthread\_join()}: adiciona uma barreira para aguardar por uma segunda \textit{thread};
+\item \texttt{pthread\_self()}: obtém o identificador da \textit{thread}.
+\end{itemize}
+
+Para ilustrar observe o programa \texttt{thrd.c} a seguir. Ele dispara duas \textit{threads} que ``dormem'' um tempo aleatório.
+
+\section*{thrd.c}
+\lstinputlisting[style=MyCStyle]{./Programas/Thread/thrd.c}
+
+A definição das funções chamadas pelo programa principal estão no arquivo a seguir.
+
+\section*{funcoes.c}
+\lstinputlisting[style=MyCStyle]{./Programas/Thread/funcoes.c}
+
+
+\section{Exercício}
+Compile e execute o programa anterior. Antes de compilar o programa, mude para o diretório onde se encontram os arquivos \texttt{funcoes.c} e \texttt{thrd.c} , com o seguinte comando:
+
+\begin{lstlisting}[style=MyBashStyle]
+cd ../Thread
+\end{lstlisting}
+
+Para compilar, utilize a seguinte linha de comando:
+
+\begin{lstlisting}[style=MyBashStyle]
+gcc -lpthread funcoes.c thrd.c -o thrd
+\end{lstlisting}
+
+Observação: a chave \texttt{-lpthread} indica que será usada a biblioteca \texttt{pthread} para Linux.
