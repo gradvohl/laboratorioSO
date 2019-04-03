@@ -8,7 +8,7 @@ O produtor gera dados e os armazena no \textit{buffer}. O consumidor, por sua ve
 \section{Problema do Produtor-Consumidor com \textit{multithreads} e semáforos}
 Para resolver o problema do Produtor-Consumidor com multithread serão criados três semáforos mutex, vazio e cheio, conforme a solução vista em sala de aula.
 
-Observe as primitivas para inicializar semáforos (\texttt{sem\_init}), executar o \textit{up} (\texttt{sem\_wait}) e o \textit{down} (\texttt{sem\_post}).
+Observe as primitivas para inicializar semáforos (\texttt{sem\_init}), para executar a operação \textit{up} (\texttt{sem\_wait}) e para executar a operação \textit{down} (\texttt{sem\_post}).
 
 Com base nessa explicação, observe o programa a seguir: 
 \lstinputlisting[style=MyCStyle]{./Programas/Semaforos/prod_cons.c}

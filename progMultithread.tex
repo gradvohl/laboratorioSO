@@ -1,5 +1,5 @@
 \chapter{Programação \textit{Multithread}}
-Uma outra forma de fazer duas ou mais tarefas ao mesmo tempo é utilizado \textit{multithreads}. Conforme já discutido em sala de aula, \textit{multithreads} são diferentes linhas de execução em um processo.
+Outra forma de fazer duas ou mais tarefas ao mesmo tempo é utilizado \textit{multithreads}. Conforme já discutido em sala de aula, \textit{multithreads} são diferentes linhas de execução em um processo.
 
 Existem algumas bibliotecas para trabalhar com \textit{multithreads}. Por exemplo, a POSIX \textit{Threads} (PThreads) -- que utilizaremos neste tutorial -- e a OpenMP, cujo paradigma é diferente da PThreads.
 
@@ -9,7 +9,7 @@ Neste tutorial, serão utilizadas as seguintes primitivas  da biblioteca PThread
 \setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}  \setlength{\parsep}{0pt}
 \item \texttt{pthread\_create()}: responsável pela criação de uma \textit{thread}.
 \item \texttt{pthread\_exit()}: responsável por retornar um valor de uma \textit{thread}.
-\item \texttt{pthread\_join()}: adiciona uma barreira para aguardar por uma segunda \textit{thread};
+\item \texttt{pthread\_join()}: adiciona uma barreira para aguardar por uma segunda \textit{thread}.
 \item \texttt{pthread\_self()}: obtém o identificador da \textit{thread}.
 \end{itemize}
 
@@ -37,4 +37,4 @@ Para compilar, utilize a seguinte linha de comando:
 gcc -lpthread funcoes.c thrd.c -o thrd
 \end{lstlisting}
 
-Observação: a chave \texttt{-lpthread} indica que será usada a biblioteca \texttt{pthread} para Linux.
+\textcolor{orange}{\faWarning} Observação: a chave \textcolor{red}{\texttt{-lpthread}} indica que será usada a biblioteca \texttt{pthread} para Linux. Em algumas distribuições, você deve usar a chave \textcolor{red}{\texttt{-pthread}}.

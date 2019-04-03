@@ -1,16 +1,18 @@
 \documentclass[12pt]{report}
 \usepackage[a4paper,margin=2cm]{geometry}
-\usepackage{libertine}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage[scaled]{beramono}
+\usepackage{fontawesome}
 \usepackage[portuges]{babel}
 \usepackage{hyperref}
 \usepackage{xspace}
 \usepackage{booktabs}
 \usepackage{multirow}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
+% \usepackage{amsmath}
+% \usepackage{amsfonts}
+% \usepackage{amssymb}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{caption} \captionsetup[table]{skip=3pt}
@@ -22,6 +24,14 @@
 \usepackage{indentfirst}
 \usepackage[os=win]{menukeys}\renewmenumacro{\keys}[+]{shadowedroundedkeys}
 \usepackage[lang={english},type={CC},modifier={by},version={4.0}]{doclicense}
+
+%Cabeçalho e rodapé
+\usepackage{fancyhdr}
+\setlength{\headheight}{52pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\slshape\nouppercase{\leftmark}}
+\rfoot{\thepage}
 
 \widowpenalty100000
 \clubpenalty100000
@@ -41,7 +51,7 @@ O objetivo deste texto é descrever os exercícios usados no laboratório da dis
 
 Esse material pode ser utilizado por qualquer pessoa, de qualquer curso ou instituição, desde que respeitadas as condições da licença CC-BY-4.0, descrita na página \pageref{chp:licenca}. Informações de como obter o material também estão nessa página.
 
-Supõe-se que o sistema operacional utilizado será o Linux. Portanto, todos os comandos descritos neste texto são para o Linux. Recomenda-se que o leitor navegue sequencialmente pelo texto. Assim, terá melhor aproveitamento do laboratório.
+Supõe-se que o sistema operacional utilizado será o Linux \faLinux. Portanto, todos os comandos descritos neste texto são para o Linux. Recomenda-se que o leitor navegue sequencialmente pelo texto. Assim, terá melhor aproveitamento do laboratório.
 
 Alguns comandos básicos para o sistema Linux estão na Tabela~\ref{tab:comandosLinux} a seguir:
 
@@ -51,10 +61,10 @@ Alguns comandos básicos para o sistema Linux estão na Tabela~\ref{tab:comandos
 \begin{tabular}{@{}ll@{}}
 \toprule
 \textbf{Comando}       & \textbf{Significado} \\ \midrule
-\Comando{ls} & Lista os arquivos locais.        \\
 \ComandoParametros{cd}{dir}        & Muda para o diretório \textcolor{red}{\texttt{dir}}.       \\
 \multirow{2}{*}{\ComandoParametros{gedit}{arquivo\,\&}}        & Abre o \textcolor{red}{\texttt{arquivo}} no editor de textos e \\
 & libera o terminal para outros comandos.     \\
+\Comando{ls} & Lista os arquivos locais.        \\
 \ComandoParametros{unzip}{arq.zip} & Descompacta o arquivo \textcolor{red}{\texttt{arq.zip}}.   \\ \bottomrule
 \end{tabular}
 \end{center}

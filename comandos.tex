@@ -26,7 +26,7 @@
   postbreak=\mbox{\textcolor{blue}{$\hookrightarrow$}\space},
   xleftmargin=\parindent,
   showstringspaces=false,
-  basicstyle=\linespread{.8}\footnotesize\ttfamily,
+  basicstyle=\linespread{.8}\footnotesize\fontencoding{T1}\fontfamily{fvm}\selectfont,
    %identifierstyle=\color{blue},
   commentstyle=\color{codegreen},
   keywordstyle=\color{magenta},
@@ -35,19 +35,23 @@
   frame = single, 
 }
 
+\newcommand{\lstprompt}{\$}
+\renewcommand*\thelstnumber{\lstprompt}
 \lstdefinestyle{MyBashStyle}{language=bash,
-  basicstyle=\ttfamily,
+  basicstyle=\fontencoding{T1}\fontfamily{fvm}\selectfont,
   xleftmargin=\parindent,
   morecomment=[s][\color{red}]{-}{\ }, 
   morecomment=[s][\color{red}]{--}{\ },
   morekeywords={uname,gcc,top,grep},%
   showstringspaces=false,
   commentstyle=\color{orange},
-  keywordstyle=\color{blue}
+  keywordstyle=\color{blue},
+  numbers=left,
+  numberstyle=\color{codegreen}\fontencoding{T1}\fontfamily{fvm}\selectfont\,
 }
 
 \lstdefinestyle{outputStyle}{
-    basicstyle=\footnotesize\ttfamily,
+    basicstyle=\footnotesize\fontencoding{T1}\fontfamily{fvm}\selectfont,
     identifierstyle=\color{black},
     breakatwhitespace=false,         
     breaklines=true,                 
