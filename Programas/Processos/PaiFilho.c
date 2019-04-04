@@ -5,7 +5,7 @@
  *   Prof. Andre Leon S. Gradvohl, Dr.
  *
  * Ultima atualizacao:
- *   26/11/2003
+ *   04/04/2019
  *
  * Para compilar:
  *   gcc PaiFilho.c -o PaiFilho
@@ -19,7 +19,6 @@ int main(void)
   int pid;
   int paiPid;
   int ret;
-  int i=0;
 
   pid = getpid();
   printf("Pronto para o fork. Meu id e:%d\n",pid);

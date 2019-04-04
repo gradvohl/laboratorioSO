@@ -1,9 +1,13 @@
 /**
  * Programa para exemplificar o tratamento de sinais.
+ * Desenvolvido por:
+ *   Prof. Andre Leon S. Gradvohl, Dr.
  *
- * Desenvolvido por Prof. Andre Leon S. Gradvohl, Dr.
+ * Ultima atualizacao:
+ *   04/04/2019
  *
- * Atualizado em: 03/08/2011
+ * Para compilar:
+ *   gcc sinais.c -o sinais.o
  */
 #include <signal.h>
 #include <stdio.h>

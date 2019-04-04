@@ -2,19 +2,17 @@
  * Este e um programa simples para exemplificar a utilizacao 
  * de Threads.
  *
- * Desenvolvido por: Prof. M.Sc. Andre Leon S. Gradvohl
- * E-mail: andre_gradvohl@yahoo.com 
+ * Desenvolvido por: 
+ *   Prof. Andre Leon S. Gradvohl, Dr.
  * 
  * Outros arquivos necessarios para a execucao desse 
  * programa sao:
  * - funcoes.h
  * - funcoes.c
  *
- * Ultima atualizacao: 14/Fev/2003
+ * Ultima atualizacao:
+ *   04/04/2019
  */
-
-
-/* Inclusao de cabecalhos*/
 #include <stdio.h>
 #include <unistd.h>  // Cabecalho para a funcao sleep
 #include <pthread.h> // Cabecalho especifico para threads POSIX
@@ -28,9 +26,9 @@ int main( void )
  meutid = pthread_self(); // Funcao que captura o id do thread.
  printf ("Meu Thread ID  = %ld\n",meutid);
 
- printf("Disparando Thread Func1");
+ printf("Disparando Thread sub_a");
 /**
- * A funcao a seguir cria um thread (linha de execucao) para a funcao "func1".
+ * A funcao a seguir cria um thread (linha de execucao) para a funcao "sub_a".
  * O prototipo da funcao e:
  *   int pthread_create(pthread_t *thread,  const  pthread_attr_t *attr, 
  *                      void *(*start_routine, void*), void *arg);
@@ -44,10 +42,10 @@ int main( void )
  pthread_create(&outrosTIDs[0], NULL, sub_a, NULL); 
  printf("(id = %ld)\n", outrosTIDs[0]);
 
+ printf("Disparando Thread sub_b");
 
- printf("Disparando Thread Func2");
 /**
- * A funcao a seguir cria um thread (linha de execucao) para a funcao "func2".
+ * A funcao a seguir cria um thread (linha de execucao) para a funcao "sub_b".
  */
  pthread_create(&outrosTIDs[1], NULL, sub_b, NULL);
  printf("(id = %ld)\n", outrosTIDs[1]);

@@ -33,11 +33,13 @@ if [ ! -f $ARQCOMPACT ]; then
    echo -e "\nAbortando script... ${RED}Contacte o professor!${NC}"  
    exit 1
 else
-    mkdir -p ${DESTDIR}
-    if [ $? -ne 0 ]; then 
-        echo -e "Problemas na criação do diretorio ${DESTDIR} !"
-        echo -e "\nAbortando script... ${RED}Contacte o professor!${NC}"
-        exit 1
+    if [ ! -d ${DESTDIR} ]; then
+       mkdir -p ${DESTDIR}
+       if [ $? -ne 0 ]; then 
+           echo -e "Problemas na criação do diretorio ${DESTDIR} !"
+           echo -e "\nAbortando script... ${RED}Contacte o professor!${NC}"
+           exit 1
+       fi
     fi
 
     ${TAR} xzf ${ARQCOMPACT} -C ${DESTDIR}

@@ -5,13 +5,14 @@
  * Baseado no programa shm_server.c disponivel em
  * http://www.cs.cf.ac.uk/Dave/C de David Marshall.
  *
- * Atualizado em: 15/12/2003
+ * Ultima atualizacao
+ *   04/04/2019
  */
-#include <sys/types.h>
-#include <sys/ipc.h>
-#include <sys/shm.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/ipc.h>  // Cabecalho para comunicacao interprocessos
+#include <sys/shm.h>  // Cabecalho para compatilhamento e memoria
 
 // Definicao do Tamanho do segmento compartilhado
 #define TamSegCompart  27
@@ -77,5 +78,3 @@ int main(void)
 
  return 0;
 }
-
-

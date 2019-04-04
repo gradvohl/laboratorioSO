@@ -4,15 +4,15 @@
  *
  * Baseado no programa shm_client.c disponivel em 
  * http://www.cs.cf.ac.uk/Dave/C de David Marshall.
- * 
- * Atualizado em: 15/12/2003
+ *
+ * Ultima atualizacao
+ *   04/04/2019
  */
-
+#include <stdio.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
-#include <stdio.h>
-#include <unistd.h>
 
 // Definicao do Tamanho do segmento compartilhado
 #define TamSegCompart  27
