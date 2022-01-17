@@ -1,28 +1,98 @@
 \chapter{Tratamento de Sinais}
 
-Sinais são usados para notificar um processo ou segmento de um evento particular. Pode-se comparar o tratamento de sinais com interrupções de hardware, que ocorrem quando um subsistema de hardware, por exemplo uma interface de entrada ou saída (E/S) de disco, gera uma interrupção para o processador quando a E/S é concluída.
+Sinais são usados para notificar um processo ou segmento de um evento particular. Pode-se comparar o tratamento de sinais com interrupções de hardware, que ocorrem quando um subsistema de hardware -- por exemplo uma interface de entrada ou saída (E/S) de disco -- gera uma interrupção para o processador quando a E/S é concluída.
 
-Este evento, por sua vez, faz com que o processador chame um tratador de interrupções. Assim, o processamento subsequente pode ser feito no sistema operacional com base na fonte e da causa da interrupção.
+Esse evento, por sua vez, faz com que o processador chame um tratador de interrupções. Assim, o processamento subsequente pode ser feito no sistema operacional com base na fonte e da causa da interrupção.
 
-Observe como isso pode ser feito no programa \texttt{sinais.c} a seguir
+\section{O comando \texttt{kill}}
+Apesar do nome, no Linux, o usuário pode usar o comando \Comando{kill} para enviar sinais para um processo em execução. Para ver uma lista de sinais que podem ser enviados execute o comando a seguir.
 
-\lstinputlisting[style=MyCStyle]{./Programas/Sinais/sinais.c}
+\begin{lstlisting}[style=MyBashStyle]
+kill -l
+\end{lstlisting}
 
-\section{Exercício}
- Antes de compilar o programa, mude para o diretório onde se encontra o arquivo \texttt{sinais.c}, com o seguinte comando:
+Dentre os vários sinais que podem ser enviados, aqueles que estão na Tabela~\ref{tab:sinais} se destacam. A coluna \textbf{Valor} indica os valores inteiros dos respectivos sinais; e na coluna \textit{Ações}, estão indicadas as ações padrão que acontecerão logo após a ocorrência do sinal. Essas ações podem ser \texttt{Term}, que indica que o processo deve terminar; \texttt{Ign}, que informa que o sinal deve ser ignorado; \texttt{Core} que aponta que o processo deve ser terminado e uma imagem da sua memória será armazenada em disco; \texttt{Stop} que indica que o processo será suspenso; e \texttt{Cont}, que informa que o processo deve continuar.
+
+\newpage
+
+\begin{table}[!htb]
+\caption{Tabela de sinais}\label{tab:sinais}
+\begin{tabular}{@{}lccp{11.3cm}@{}}
+\toprule
+\textbf{Sinal}   & \textbf{Valor(es)}                        & \textbf{Ação} & \textbf{Descrição}\\ \midrule
+\texttt{SIGHUP}  & 1 & \texttt{Term} & \textit{Hangup} detectado no terminal de controle ou morte do processo de controle. \\
+\texttt{SIGINT}  & 2 & \texttt{Term} & Interrupção do process, via teclado (\keys{\ctrl + c}). \\
+\texttt{SIGQUIT} & 3 & \texttt{Core} & Saída (\textit{quit}) pelo teclado.\\
+\texttt{SIGKILL} & 9 & \texttt{Term} & Sinal de \textit{kill}. \\
+\texttt{SIGTERM} & 15 & \texttt{Term} & Sinal de término.\\
+\texttt{SIGCHLD} & 20, 17, 18 & \texttt{Ign}  & Processo filho parou ou terminou. \\
+\texttt{SIGSTOP} & 17, 19, 23 & \texttt{Stop} & Para o processo. \\
+\texttt{SIGCONT} & 19, 18, 25 & \texttt{Cont} & Continua, se parou. \\
+\texttt{SIGTSTP} & 18, 20, 24 & \texttt{Stop} & Para o processo pelo terminal.\\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Primeiro Exercicio}
+Neste primeiro exercício, vamos usar um programa simples que apenas imprime pontos na tela. O código para esse programa é o seguinte.
+
+\lstinputlisting[style=MyCStyle]{./Programas/Sinais/ponto.c}
+
+Antes de compilar o programa, mude para o diretório onde se encontra o arquivo \texttt{sinais.c}, com o seguinte comando:
 
 \begin{lstlisting}[style=MyBashStyle]
 cd ../Sinais
 \end{lstlisting}
 
-Agora para compilar o programa utilize o comando a seguir:
+Para compilar o programa utilize o comando a seguir:
+\begin{lstlisting}[style=MyBashStyle]
+gcc pontos.c -o pontos.o 
+\end{lstlisting}
+
+Depois de compilado, será necessário abrir uma segunda janela do terminal. Na primeira janela, você executará o programa \texttt{./pontos.o}. Certifique-se de que na segunda janela você está no diretório \texttt{Sinais} (para isso, use o comando \Comando{pwd}).
+
+Agora, na segunda janela, utilize o comando a seguir para descobrir qual é o identificador do processo \textit{./pontos.o} que você instanciou na primeira janela. Note que o identificador é o número que está na segunda coluna da saída do comando.
+
+\begin{lstlisting}[style=MyBashStyle]
+ps -ef | grep pontos.o
+\end{lstlisting}
+
+Após descobrir o identificador, na segunda janela use o comando \Comando{kill} para parar o processo instanciado na primeira janela. Para isso, use o comando a seguir, substituindo \texttt{<pid>} pelo identificador do processo \texttt{pontos.o}.
+
+\begin{lstlisting}[style=MyBashStyle]
+kill -s STOP <pid>
+\end{lstlisting}
+
+Observe que, na primeira janela, o processo \texttt{pontos.o} está parado. Para que esse processo retorne, use o comando a seguir, substituindo \texttt{<pid>} pelo identificador do processo.
+
+\begin{lstlisting}[style=MyBashStyle]
+kill -s CONT <pid>
+\end{lstlisting}
+
+Para \enquote{matar} definitivamente o processo, use o comando a seguir.
+
+\begin{lstlisting}[style=MyBashStyle]
+kill -s KILL <pid>
+\end{lstlisting}
+
+
+\section{Interceptação de sinais via processo}
+Utilizando comandos específicos, os processos podem interceptar alguns sinais enviados a eles a partir do sistema operacional. Isso pode ser útil quando o processo quer tratar esses sinais, antes que o sistema operacional os trate definitivamente.
+
+No programa \texttt{sinais.c} a seguir, veremos como interceptar os sinais enviados a esse processo. Para isso, será criado um procedimento específico chamado \texttt{trataSinal} que será responsável pela interceptação e tratamento de alguns sinais.
+
+\lstinputlisting[style=MyCStyle]{./Programas/Sinais/sinais.c}
+
+\section{Segundo Exercício}
+ 
+ Para esse segundo exercício, precisamos compilar o programa \texttt{sinais.o} com o comando a seguir:
+ 
 \begin{lstlisting}[style=MyBashStyle]
 gcc sinais.c -o sinais.o 
 \end{lstlisting}
 
-Depois de compilado, será necessário abrir uma segunda janela do terminal. Na primeira janela, você executará o programa \texttt{./sinais.o}. 
+Após compilado, será necessário abrir uma segunda janela do terminal. Na primeira janela, você executará o programa \texttt{./sinais.o}. 
 
-Depois que o programa entrar em execução, tente pressionar as teclas \keys{\ctrl + c} para ver se o programa termina.
+Quando o programa entrar em execução, tente pressionar as teclas \keys{\ctrl + c} para ver se o programa termina.
 
 Para encerrar de fato o programa, na segunda janela, utilize o comando \Comando{kill} para enviar um sinal de término para o programa. Para isso, utilize o comando a seguir:
 
