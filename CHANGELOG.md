@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.0.4] - 2022-01-17
+## [0.4] - 2022-01-17
 ### Added
 - Um arquivo CHANGELOG.md com as alterações realizadas.
 - Mais informações sobre o comando kill no Capítulo 4.
