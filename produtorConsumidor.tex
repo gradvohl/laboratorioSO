@@ -1,7 +1,7 @@
 \chapter{Problema do Produtor-Consumidor}
 Um dos problemas discutidos em sala de aula é o do produtor-consumidor. Em linhas gerais, existem dois processos, um produtor e um consumidor, que competem pelo uso de um recurso (no caso um \textit{buffer}).
 
-O produtor gera dados e os armazena no \textit{buffer}. O consumidor, por sua vez, lê dados do buffer e os utiliza. A região crítica é o \textit{buffer}, pois apenas um dos processos deve estar utilizando o \textit{buffer} a cada instante. O sistema operacional deve prover meios de garantir essa exclusão mútua.
+O produtor gera dados e os armazena no \textit{buffer}. O consumidor, por sua vez, lê dados do buffer e os utiliza. A região crítica é o \textit{buffer}, pois apenas um dos processos deve estar utilizando essa região crítica a cada instante. O sistema operacional deve prover meios de garantir essa exclusão mútua.
 
 %Existem várias formas de se resolver esse problema. Nesse laboratório serão mostradas duas delas. A primeira utilizando \textit{multithread} e uma estratégia chamada \texttt{mutex}. A segunda usando multiprocessamento e semáforos.
 
@@ -14,16 +14,18 @@ Com base nessa explicação, observe o programa a seguir:
 \lstinputlisting[style=MyCStyle]{./Programas/Semaforos/prod_cons.c}
 
 \section{Exercício}
-Antes de compilar o programa, mude para o diretório onde se encontra o arquivo \texttt{principal.c} , com o seguinte comando:
+Antes de compilar o programa, mude para o diretório onde se encontra o arquivo \texttt{prod\_cons.c}, com o seguinte comando:
 
 \begin{lstlisting}[style=MyBashStyle]
-cd ../ProdCons
+cd ../Semaforos
 \end{lstlisting}
 
 Compile o programa anterior com a seguinte linha de comando:
 
 \begin{lstlisting}[style=MyBashStyle]
-gcc -lpthread prod_cons.c  -o prod_cons.o
+gcc -lpthread prod_cons.c -o prod_cons.o
 \end{lstlisting}
+
+\textcolor{orange}{\faWarning} Observação: a chave \textcolor{red}{\texttt{-lpthread}} indica que será usada a biblioteca \texttt{pthread} para Linux. Em algumas distribuições, você deve usar a chave \textcolor{red}{\texttt{-pthread}}.
 
 Agora execute o programa \texttt{./prod\_cons.o} e veja o resultado.
