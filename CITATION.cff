@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+title: >-
+  laboratorioSO - Tutorial para o Laboratório de
+  Sistemas Operacionais
+message: Please cite this tutorial using these metadata.
+type: software
+authors:
+  - given-names: Andre Leon
+    family-names: Sampaio Gradvohl
+    email: gradvohl@ft.unicamp.br
+    affiliation: University of Campinas
+    orcid: 'https://orcid.org/0000-0002-6520-9740'
