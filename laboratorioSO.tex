@@ -1,5 +1,5 @@
-\documentclass[12pt]{report}
-\usepackage[a4paper,margin=2cm]{geometry}
+\documentclass[a4paper,12pt]{report}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=3cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{libertine}
@@ -21,24 +21,46 @@
 \onehalfspacing
 %\doublespacing
 %\setstretch{1.1}
-\usepackage{indentfirst}
+
+\usepackage{titlesec}
+\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+
 \usepackage[os=win]{menukeys}\renewmenumacro{\keys}[+]{shadowedroundedkeys}
 \usepackage[lang={english},type={CC},modifier={by},version={4.0}]{doclicense}
 
 %Cabeçalho e rodapé
 \usepackage{fancyhdr}
 \setlength{\headheight}{52pt}
+\fancypagestyle{plain}{% Definição das páginas de capítulo
+  \fancyhf{}%
+  \fancyfoot[r]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}% Line at the header invisible
+  \renewcommand{\footrulewidth}{0pt}% Line at the footer visible
+}
+
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{\slshape\nouppercase{\leftmark}}
-\rfoot{\thepage}
+\fancyfoot[R]{\thepage}
 
 \widowpenalty100000
 \clubpenalty100000
 
 \title{Laboratório de Sistemas Operacionais}
-\author{Prof. André Leon S. Gradvohl, Dr.\\\href{mailto://exmaple@example.com}{gradvohl@ft.unicamp.br}}
+\author{Prof. André Leon S. Gradvohl, Dr.\\\href{mailto://gradvohl@ft.unicamp.br}{gradvohl@ft.unicamp.br}}
 \date{17 de janeiro de 2022}
+
+\hypersetup{
+    pdfstartview={XYZ null null .75}, %Abre a página em 100%
+    pdfcreator=pdflatex,
+    pdfdisplaydoctitle=true,
+    pdftitle={Laboratório de Sistemas Operacionais},
+    pdfauthor={André Leon Gradvohl Dr},
+    pdfsubject={Tutorial para a demonstração de alguns conceitos de sistemas operacionais},
+    pdfkeywords={Sistemas Operacionais -- Linux -- Processos}
+}
 
 \input{comandos.tex}
 
@@ -46,6 +68,9 @@
 
 \maketitle
 \tableofcontents
+\setlength\parindent{0pt} %Sem identação no documento
+\setlength{\parskip}{1em} %espaço entre parágrafos
+
 \chapter{Introdução}
 O objetivo deste texto é descrever os exercícios usados no laboratório da disciplina Sistemas Operacionais. Essa disciplina é oferecida na Faculdade de Tecnologia da Universidade Estadual de Campinas (FT/UNICAMP) para os cursos Bacharelado em Sistemas de Informação e Tecnologia em Análise e Desenvolvimento de Sistemas.
 
@@ -62,8 +87,8 @@ Alguns comandos básicos para o sistema Linux estão na Tabela~\ref{tab:comandos
 \toprule
 \textbf{Comando}       & \textbf{Significado} \\ \midrule
 \ComandoParametros{cd}{dir}        & Muda para o diretório \textcolor{red}{\texttt{dir}}.       \\
-\multirow{2}{*}{\ComandoParametros{gedit}{arquivo\,\&}}        & Abre o \textcolor{red}{\texttt{arquivo}} no editor de textos e \\
-& libera o terminal para outros comandos.     \\
+\multirow{2}{*}{\ComandoParametros{gedit}{arquivo\,\&}}        & Abre o \textcolor{red}{\texttt{arquivo}} no editor de textos em segundo \\ 
+& plano e libera o terminal para outros comandos.     \\
 \Comando{ls} & Lista os arquivos locais.        \\
 \ComandoParametros{unzip}{arq.zip} & Descompacta o arquivo \textcolor{red}{\texttt{arq.zip}}.   \\ \bottomrule
 \end{tabular}

@@ -54,7 +54,6 @@ int main(void)
      sem_init(&cheio, 0, 0);
 
      pthread_t thd0, thd1;
-
      /**
       * Incializa as threads
       * 1o parametro: variavel thread
