@@ -114,11 +114,21 @@ Há ainda algumas dicas de teclas para os usuários iniciantes no \textit{bash} 
 \keys{\ctrl + a} ou \keys{Home} & Navega para o início da linha.\\
 \keys{\ctrl + e} ou \keys{End} & Navega para o final da linha.\\
 \keys{\ctrl + \arrowkeyleft} & Navega para a palavra anterior o cursor.\\
-\keys{\ctrl+\arrowkeyright} & Navega para a próxima palavra a frente do cursor.\\
+\keys{\ctrl + \arrowkeyright} & Navega para a próxima palavra a frente do cursor.\\
 \bottomrule
 \end{tabular}
 \end{center}
 \end{table}
+
+\section{Manual dos comandos Linux}
+Se a distribuição Linux que você está utilizando for instalada por completo, então o manual de todos os comandos deve estar disponível no próprio a partir da linha de comando.
+
+Por exemplo, se você quiser saber para o que serve o comando \Comando{ls}, basta utilizar o comando a seguir. Note que não é necessário você digitar o símbolo \$. Esse símbolo, no início da linha, indica que o terminal está apto a receber os comandos. Isso vale para todos os comandos desse ponto em diante.
+
+\begin{lstlisting}[style=MyBashStyle]
+man ls
+\end{lstlisting}
+
 
 \input{interacaoSO.tex}
 

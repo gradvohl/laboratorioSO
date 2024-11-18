@@ -54,7 +54,7 @@ Para compilar, utilize a seguinte linha de comando:
 gcc -lpthread funcoes.c thrd.c -o thrd
 \end{lstlisting}
 
-\textcolor{orange}{\faWarning} Observação: a chave \textcolor{red}{\texttt{-lpthread}} indica que será usada a biblioteca \texttt{pthread} para Linux. Em algumas distribuições, você deve usar a chave \textcolor{red}{\texttt{-pthread}}.
+\textcolor{orange}{\faExclamationTriangle} Observação: a chave \textcolor{red}{\texttt{-lpthread}} indica que será usada a biblioteca \texttt{pthread} para Linux. Em algumas distribuições, você deve usar a chave \textcolor{red}{\texttt{-pthread}}.
 
 \section{Passagem de parâmetros para \textit{threads}}
 Vejamos agora como ocorre a passagem de parâmetros para os \textit{threads}. Antes, é preciso lembrar que na biblioteca PThreads, os \textit{threads} usam uma assinatura específica descrita na Figura~\ref{fig:assinaturaThread}. 
@@ -84,4 +84,4 @@ Compile e execute o programa anterior utilizando a seguinte linha de comando:
 gcc -lpthread auxFuncs.c mediaThreads.c -o mediaThread.o
 \end{lstlisting}
 
-\textcolor{orange}{\faWarning} Observação: a chave \textcolor{red}{\texttt{-lpthread}} indica que será usada a biblioteca \texttt{pthread} para Linux. Em algumas distribuições, você deve usar a chave \textcolor{red}{\texttt{-pthread}}.
+\textcolor{orange}{\faExclamationTriangle} Observação: a chave \textcolor{red}{\texttt{-lpthread}} indica que será usada a biblioteca \texttt{pthread} para Linux. Em algumas distribuições, você deve usar a chave \textcolor{red}{\texttt{-pthread}}.
