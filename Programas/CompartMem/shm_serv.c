@@ -67,8 +67,7 @@ int main(void)
 
  /* Aguarda ate que o outro processo coloque um "*" 
   * primeira posicao do segmento de memoria 
-  * compartilhado
-  */
+  * compartilhado */
  while (*shm != '*')
     sleep(1);
 
