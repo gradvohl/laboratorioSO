@@ -11,6 +11,7 @@
  * Para compilar:
  *   gcc -pthread prod_cons.c -o prod_cons
  */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <pthread.h>
