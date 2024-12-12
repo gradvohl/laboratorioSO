@@ -9,7 +9,6 @@
  *
  * Para compilar:
  *   gcc zumbi.c -o zumbi
- *
  */  
 #include <stdio.h>
 #include <stdlib.h>
