@@ -1,6 +1,6 @@
 \chapter{Tratamento de Sinais}
 
-Sinais são usados para notificar um processo ou segmento de um evento particular. Pode-se comparar o tratamento de sinais com interrupções de hardware, que ocorrem quando um subsistema de hardware -- por exemplo uma interface de entrada ou saída (E/S) de disco -- gera uma interrupção para o processador quando a E/S é concluída.
+Sinais são usados para notificar um processo ou segmento de um evento particular. Pode-se comparar o tratamento de sinais com interrupções de hardware, que ocorrem quando um subsistema de hardware -- por exemplo, uma interface de entrada ou saída (E/S) de disco -- gera uma interrupção para o processador quando a E/S é concluída.
 
 Esse evento, por sua vez, faz com que o processador chame um tratador de interrupções. Assim, o processamento subsequente pode ser feito no sistema operacional com base na fonte e da causa da interrupção.
 
@@ -20,7 +20,7 @@ Dentre os vários sinais que podem ser enviados, aqueles que estão na Tabela~\r
 \begin{tabular}{@{}lccp{11.3cm}@{}}
 \toprule
 \textbf{Sinal}   & \textbf{Valor(es)}                        & \textbf{Ação} & \textbf{Descrição}\\ \midrule
-\texttt{SIGHUP}  & 1 & \texttt{Term} & \textit{Hangup} detectado no terminal de controle ou morte do processo de controle. \\
+\multirow{2}{*}{\texttt{SIGHUP}}  & \multirow{2}{*}{1} & \multirow{2}{*}{\texttt{Term}} & \textit{Hangup} detectado no terminal de controle ou morte do processo de controle. \\
 \texttt{SIGINT}  & 2 & \texttt{Term} & Interrupção do process, via teclado (\keys{\ctrl + c}). \\
 \texttt{SIGQUIT} & 3 & \texttt{Core} & Saída (\textit{quit}) pelo teclado.\\
 \texttt{SIGKILL} & 9 & \texttt{Term} & Sinal de \textit{kill}. \\
@@ -32,8 +32,8 @@ Dentre os vários sinais que podem ser enviados, aqueles que estão na Tabela~\r
 \end{tabular}
 \end{table}
 
-\subsection{Primeiro Exercicio}
-Neste primeiro exercício, vamos usar um programa simples que apenas imprime pontos na tela. O código para esse programa é o seguinte.
+\subsection{Exercicio}
+Neste primeiro exercício, usaremos um programa simples que apenas imprime pontos na tela. O código para esse programa é o seguinte.
 
 \lstinputlisting[style=MyCStyle]{./Programas/Sinais/ponto.c}
 
@@ -45,24 +45,24 @@ cd ../Sinais
 
 Para compilar o programa utilize o comando a seguir:
 \begin{lstlisting}[style=MyBashStyle]
-gcc pontos.c -o pontos.o 
+gcc pontos.c -o pontos 
 \end{lstlisting}
 
-Depois de compilado, será necessário abrir uma segunda janela do terminal. Na primeira janela, você executará o programa \texttt{./pontos.o}. Certifique-se de que na segunda janela você está no diretório \texttt{Sinais} (para isso, use o comando \Comando{pwd}).
+Após compilado, será necessário abrir uma segunda janela do terminal. Na primeira janela, você executará o programa \texttt{./pontos}. Certifique-se de que na segunda janela você está no diretório \texttt{Sinais} (para isso, use o comando \Comando{pwd}).
 
-Agora, na segunda janela, utilize o comando a seguir para descobrir qual é o identificador do processo \textit{./pontos.o} que você instanciou na primeira janela. Note que o identificador é o número que está na segunda coluna da saída do comando.
+Agora, na segunda janela, utilize o comando a seguir para descobrir qual é o identificador do processo \textit{./pontos} que você instanciou na primeira janela. Note que o identificador é o número que está na segunda coluna da saída do comando.
 
 \begin{lstlisting}[style=MyBashStyle]
-ps -ef | grep pontos.o
+ps -ef | grep pontos
 \end{lstlisting}
 
-Após descobrir o identificador, na segunda janela use o comando \Comando{kill} para parar o processo instanciado na primeira janela. Para isso, use o comando a seguir, substituindo \texttt{<pid>} pelo identificador do processo \texttt{pontos.o}.
+Após descobrir o identificador, na segunda janela use o comando \Comando{kill} para parar o processo instanciado na primeira janela. Para isso, use o comando a seguir, substituindo \texttt{<pid>} pelo identificador do processo \texttt{pontos}.
 
 \begin{lstlisting}[style=MyBashStyle]
 kill -s STOP <pid>
 \end{lstlisting}
 
-Observe que, na primeira janela, o processo \texttt{pontos.o} está parado. Para que esse processo retorne, use o comando a seguir, substituindo \texttt{<pid>} pelo identificador do processo.
+Observe que, na primeira janela, o processo \texttt{pontos} está parado. Para que esse processo retorne, use o comando a seguir, substituindo \texttt{<pid>} pelo identificador do processo.
 
 \begin{lstlisting}[style=MyBashStyle]
 kill -s CONT <pid>
@@ -82,15 +82,15 @@ No programa \texttt{sinais.c} a seguir, veremos como interceptar os sinais envia
 
 \lstinputlisting[style=MyCStyle]{./Programas/Sinais/sinais.c}
 
-\section{Segundo Exercício}
+\subsection{Exercício}
  
- Para esse segundo exercício, precisamos compilar o programa \texttt{sinais.o} com o comando a seguir:
+ Para esse segundo exercício, precisamos compilar o programa \texttt{sinais} com o comando a seguir:
  
 \begin{lstlisting}[style=MyBashStyle]
-gcc sinais.c -o sinais.o 
+gcc sinais.c -o sinais 
 \end{lstlisting}
 
-Após compilado, será necessário abrir uma segunda janela do terminal. Na primeira janela, você executará o programa \texttt{./sinais.o}. 
+Após compilado, será necessário abrir uma segunda janela do terminal. Na primeira janela, você executará o programa \texttt{./sinais}. 
 
 Quando o programa entrar em execução, tente pressionar as teclas \keys{\ctrl + c} para ver se o programa termina.
 
@@ -105,5 +105,5 @@ kill -QUIT <pid>
 Importante: para saber o identificador do processo \texttt{./sinais} que está em execução na primeira janela, use o comando a seguir:
 
 \begin{lstlisting}[style=MyBashStyle]
-ps -ef | grep sinais.o
+ps -ef | grep sinais
 \end{lstlisting}

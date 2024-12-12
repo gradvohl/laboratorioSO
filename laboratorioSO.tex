@@ -8,6 +8,7 @@
 \usepackage[portuges]{babel}
 \usepackage{hyperref}
 \usepackage{xspace}
+\usepackage[brazilian,noabbrev,nameinlink]{cleveref}
 \usepackage{booktabs}
 \usepackage{multirow}
 % \usepackage{amsmath}
@@ -50,7 +51,7 @@
 
 \title{Laboratório de Sistemas Operacionais}
 \author{Prof. André Leon S. Gradvohl, Dr.\\\href{mailto://gradvohl@ft.unicamp.br}{gradvohl@ft.unicamp.br}}
-\date{17 de janeiro de 2022}
+\date{17 de junho de 2025}
 
 \hypersetup{
     pdfstartview={XYZ null null .75}, %Abre a página em 100%
@@ -71,72 +72,15 @@
 \setlength\parindent{0pt} %Sem identação no documento
 \setlength{\parskip}{1em} %espaço entre parágrafos
 
-\chapter{Introdução}
-O objetivo deste texto é descrever os exercícios usados no laboratório da disciplina Sistemas Operacionais. Essa disciplina é oferecida na Faculdade de Tecnologia da Universidade Estadual de Campinas (FT/UNICAMP) para os cursos Bacharelado em Sistemas de Informação e Tecnologia em Análise e Desenvolvimento de Sistemas.
-
-Esse material pode ser utilizado por qualquer pessoa, de qualquer curso ou instituição, desde que respeitadas as condições da licença CC-BY-4.0, descrita na página \pageref{chp:licenca}. Informações de como obter o material também estão nessa página.
-
-Supõe-se que o sistema operacional utilizado será o Linux \faLinux. Portanto, todos os comandos descritos neste texto são para o Linux. Recomenda-se que o leitor navegue sequencialmente pelo texto. Assim, terá melhor aproveitamento do laboratório.
-
-Alguns comandos básicos para o sistema Linux estão na Tabela~\ref{tab:comandosLinux} a seguir:
-
-\begin{table}[!htb]
-\begin{center}
-    \caption{Lista de comandos comuns no Linux.}\label{tab:comandosLinux}
-\begin{tabular}{@{}ll@{}}
-\toprule
-\textbf{Comando}       & \textbf{Significado} \\ \midrule
-\ComandoParametros{cd}{dir}        & Muda para o diretório \textcolor{red}{\texttt{dir}}.       \\
-\multirow{2}{*}{\ComandoParametros{gedit}{arquivo\,\&}}        & Abre o \textcolor{red}{\texttt{arquivo}} no editor de textos em segundo \\ 
-& plano e libera o terminal para outros comandos.     \\
-\Comando{ls} & Lista os arquivos locais.        \\
-\ComandoParametros{unzip}{arq.zip} & Descompacta o arquivo \textcolor{red}{\texttt{arq.zip}}.   \\ \bottomrule
-\end{tabular}
-\end{center}
-\end{table}
-
-Todos os comandos que serão utilizados nesse tutorial serão executados no interpretador da linha de comandos (\textit{shell}), também chamado de terminal.
-
-Há ainda algumas dicas de teclas para os usuários iniciantes no \textit{bash} (o interpretador de comandos padrão no Linux). Elas estão resumidas na Tabela~\ref{tab:teclasBash} a seguir.
-
-\begin{table}[!htb]
-\begin{center}
-    \caption{Teclas úteis no \textit{bash}.}\label{tab:teclasBash}
-\begin{tabular}{@{}cl@{}}
-\toprule
-\textbf{Teclas}     & \textbf{Significado} \\ \midrule
-\keys{\arrowkeyup} & Repete o último comando.        \\
-\keys{\arrowkeydown} & Repete o próximo comando.        \\
-\keys{\ctrl + c} & Envia um sinal de término para o processo.\\
-\keys{\tab} & Completa o nome do comando ou do arquivo.\\ 
-\keys{\esc + d} & Apaga a próxima palavra a frente do cursor.\\
-\keys{\ctrl + k} & Apaga do cursor até o final da linha.\\
-\keys{\ctrl + a} ou \keys{Home} & Navega para o início da linha.\\
-\keys{\ctrl + e} ou \keys{End} & Navega para o final da linha.\\
-\keys{\ctrl + \arrowkeyleft} & Navega para a palavra anterior o cursor.\\
-\keys{\ctrl + \arrowkeyright} & Navega para a próxima palavra a frente do cursor.\\
-\bottomrule
-\end{tabular}
-\end{center}
-\end{table}
-
-\section{Manual dos comandos Linux}
-Se a distribuição Linux que você está utilizando for instalada por completo, então o manual de todos os comandos deve estar disponível no próprio a partir da linha de comando.
-
-Por exemplo, se você quiser saber para o que serve o comando \Comando{ls}, basta utilizar o comando a seguir. Note que não é necessário você digitar o símbolo \$. Esse símbolo, no início da linha, indica que o terminal está apto a receber os comandos. Isso vale para todos os comandos desse ponto em diante.
-
-\begin{lstlisting}[style=MyBashStyle]
-man ls
-\end{lstlisting}
-
+\input{introducao}
 
 \input{interacaoSO.tex}
 
-\input{infoProcessos.tex}
-
-\input{sinais.tex}
+\input{infoProcessos}
 
 \input{disparandoProcessos.tex}
+
+\input{sinais.tex}
 
 \input{compartilhamentoMemoria.tex}
 

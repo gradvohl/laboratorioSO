@@ -1,3 +1,5 @@
+\newcommand{\semaspas}[1]{\enquote{\texttt{#1}} {\scriptsize (sem aspas)}}
+
 \newcommand{\Comando}[1]{{\color{blue}\texttt{#1}}}
 %
 \newcommand{\ComandoParametros}[2]{%
@@ -20,6 +22,8 @@
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
+% Adiciona o : após o número da linha
+\renewcommand*\thelstnumber{\the\value{lstnumber}:}
 \lstdefinestyle{MyCStyle}{language=C,
   belowcaptionskip=1\baselineskip,
   breaklines=true,
@@ -30,24 +34,24 @@
    %identifierstyle=\color{blue},
   commentstyle=\color{codegreen},
   keywordstyle=\color{magenta},
-  numberstyle=\tiny\color{codegray},
+  numbers=left,
+  numberstyle=\scriptsize\color{codegray},
   stringstyle=\color{codepurple},
   frame = single, 
 }
 
-\newcommand{\lstprompt}{\$}
-\renewcommand*\thelstnumber{\lstprompt}
+%\newcommand{\lstprompt}{\$}
+%\renewcommand*\thelstnumber{\lstprompt}
 \lstdefinestyle{MyBashStyle}{language=bash,
   basicstyle=\fontencoding{T1}\fontfamily{fvm}\selectfont,
   %xleftmargin=\parindent,
   xleftmargin=2.7ex,
   morecomment=[s][\color{red}]{-}{\ }, 
   morecomment=[s][\color{red}]{--}{\ },
-  morekeywords={uname,gcc,top,grep},%
+  morekeywords={uname,gcc,top,grep,man,ls},%
   showstringspaces=false,
   commentstyle=\color{orange},
   keywordstyle=\color{blue},
-  numbers=left,
   numberstyle=\color{codegreen}\fontencoding{T1}\fontfamily{fvm}\selectfont\,
 }
 
@@ -61,7 +65,7 @@
     showspaces=false,                
     showstringspaces=false,
     showtabs=false,                  
-    xleftmargin=\parindent,
+    xleftmargin=2ex,
     postbreak=\mbox{\textcolor{blue}{$\hookrightarrow$}\space},
 }
 

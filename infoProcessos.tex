@@ -1,7 +1,10 @@
-\section{Obtendo informações sobre processos}
-Existem dois comandos para obtenção de informações sobre processos: \Comando{ps} e \Comando{top}.
+\chapter{Obtendo informações sobre os processos}
+Neste capítulo, verificaremos como obter informações sobre os processos em andamento no sistema. Também mostraremos como o próprio processo pode obter as informações sobre si por meio de requisições ao sistema operacional.
 
-O comando \Comando{ps} informa o status dos processos de forma sucinta. As informações que o comando \Comando{ps} apresenta são:
+\section{Obtendo informações sobre os processos em andamento no sistema}
+Existem dois comandos para obtenção de informações sobre processos em andamento no sistema. São os comandos \Comando{ps} e \Comando{top}.
+
+O comando \Comando{ps} informa o \textit{status} dos processos sucintamente. As informações que o comando \Comando{ps} apresenta são:
 
 \begin{itemize}
 \setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}  \setlength{\parsep}{0pt}
@@ -11,7 +14,7 @@ O comando \Comando{ps} informa o status dos processos de forma sucinta. As infor
 \item \texttt{CMD}: comando instanciado.
 \end{itemize}
 
-O comando \Comando{top} é um pouco mais poderoso, pois reporta mais informações.  Entre tais informações estão:
+O comando \Comando{top} é um pouco mais poderoso, pois reporta mais informações e os dados são atualizados a cada cinco segundos.  Entre tais informações estão:
 
 \begin{itemize}
 \setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}  \setlength{\parsep}{0pt}
@@ -44,24 +47,25 @@ O comando \Comando{top} é um pouco mais poderoso, pois reporta mais informaçõ
 \end{itemize}
 \end{itemize}
 
-\section{Exercício}
-Utilize o comando \Comando{top} em sua máquina e tente identificar as informações providas pelo comando.
+\subsection{Exercício}
 
-\chapter{Obtendo informações sobre os processos}
-Neste capítulo, vamos verificar como obter informações sobre o próprio processo a partir dele mesmo. O processo consulta essas informações através de requisições ao sistema operacional.
+Primeiro, utilize o comando \Comando{ps} em sua máquina e tente identificar as informações que o comando provê.
 
-\section{Obtendo informações sobre o processo, via programa}
+Depois, utilize o comando \Comando{top} em sua máquina e tente identificar todas as informações que o comando apresenta.
+
+
+\section{Obtendo informações sobre o processo via programa}
 É possível construir programas que interajam com o sistema operacional e obtenham algumas informações. Observe o código do programa a seguir:
 
 \lstinputlisting[style=MyCStyle]{./Programas/Processos/infoProcesso.c}
 
-\section{Exercício}
-Compile o programa anterior e execute-o.
+\subsection{Exercício}
+Nesse exercício, compilaremos o programa anterior para depois executá-lo.
 
-Antes de compilar o programa, mude para o diretório onde se encontra o arquivo  \texttt{infoProcesso.c}, com o seguinte comando:
+Antes de compilar o programa, mude para o diretório onde se encontra o arquivo \texttt{infoProcesso.c}. É provável que você esteja atualmente no diretório \texttt{InfoSistema}. Então, para mudar para o diretório \texttt{Processos},  use o comando a seguir:
 
 \begin{lstlisting}[style=MyBashStyle]
-cd Processos
+cd ../Processos
 \end{lstlisting}
 
 Para compilar o programa utilize o comando a seguir:

@@ -1,7 +1,9 @@
 \chapter{Programação \textit{Multithread}}
-Outra forma de fazer duas ou mais tarefas ao mesmo tempo é utilizado \textit{multithreads}. Conforme já discutido em sala de aula, \textit{multithreads} são diferentes linhas de execução em um processo.
+Outra forma de fazer com que duas ou mais tarefas sejam executadas \enquote{ao mesmo tempo} é utilizando \textit{multithreads}. Conforme já discutido em sala de aula, \textit{multithreads} são diferentes linhas de execução em um processo. Portanto, dois ou mais trechos de código de um mesmo processo podem estar em execução ao mesmo tempo.
 
-Existem algumas bibliotecas para trabalhar com \textit{multithreads}. Por exemplo, a POSIX \textit{Threads} (PThreads) -- que utilizaremos neste tutorial -- e a OpenMP, cujo paradigma é diferente da PThreads.
+
+\section{Biblioteca POSIX \textit{Threads}}
+Existem algumas bibliotecas para trabalhar com \textit{multithreads}. Por exemplo, a POSIX \textit{Threads} (PThreads) -- que utilizaremos neste tutorial -- e a OpenMP, que adota um paradigma é diferente da PThreads.
 
 Neste tutorial, serão utilizadas as seguintes primitivas  da biblioteca PThreads:
 
@@ -41,7 +43,7 @@ A definição das funções chamadas pelo programa principal estão no arquivo a
 
 
 
-\section{Exercício}
+\subsection{Exercício}
 Compile e execute o programa anterior. Antes de compilar o programa, mude para o diretório onde se encontram os arquivos \texttt{funcoes.c} e \texttt{thrd.c} , com o seguinte comando:
 
 \begin{lstlisting}[style=MyBashStyle]
@@ -77,7 +79,7 @@ Perceba também que a variável de retorno (\texttt{soma}) é um ponteiro. Esse 
 \section*{mediaThread.c}
 \lstinputlisting[style=MyCStyle]{./Programas/Thread/mediaThreads.c}
 
-\section{Exercício}
+\subsection{Exercício}
 Compile e execute o programa anterior utilizando a seguinte linha de comando:
 
 \begin{lstlisting}[style=MyBashStyle]
@@ -85,3 +87,8 @@ gcc -lpthread auxFuncs.c mediaThreads.c -o mediaThread.o
 \end{lstlisting}
 
 \textcolor{orange}{\faExclamationTriangle} Observação: a chave \textcolor{red}{\texttt{-lpthread}} indica que será usada a biblioteca \texttt{pthread} para Linux. Em algumas distribuições, você deve usar a chave \textcolor{red}{\texttt{-pthread}}.
+
+
+\section{Mais informações sobre programação \textit{multithread}}
+
+No repositório \href{https://github.com/gradvohl/YAPTT}{\textit{Yet Another PThread Tutorial} -- YAPTT}, disponível no GitHub, há um tutorial (em inglês) bastante completo sobre programação usando PThreads.

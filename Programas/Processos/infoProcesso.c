@@ -1,10 +1,11 @@
 /**
  * Programa para capturar informacoes sobre um processo.
+ *
  * Desenvolvido por: 
  *   Prof. Andre Leon S. Gradvohl, Dr.
  *
  * Ultima atualizacao:
- *   04/04/2019
+ *   21/11/2024
  *
  * Para compilar:
  *   gcc infoProcesso.c -o infoProcesso 
@@ -12,36 +13,20 @@
 #include <stdlib.h>     // Cabecalho de Biblioteca padrao
 #include <stdio.h>      // Cabecalho de Biblioteca de I/O padrao
 #include <sched.h>      // Cabecalho de Biblioteca de escalonamento 
-#include <sys/types.h>  // Cabecalho com definicao de tipos de dados
-#include <sys/utsname.h>// Cabecalho com definicao da estrutura utsname
 #include <unistd.h>     // Cabecalho com definicao de constantes padrao
-
-#define Kbyte 1024.
-#define Mbyte 1048576. //(1024 Kbytes)
-#define Nelem 3
 
 int main(void)
 {
-  pid_t idProcesso;
-  pid_t idProcessoPai;
-  uid_t idUsuario;
-  gid_t idGrupo;
+  pid_t idProcesso;    // Variavel para armazenar o id do processo.
+  pid_t idProcessoPai; // Variavel para armazenar o id do processo pai.
+  uid_t idUsuario;     // Variavel para armazenar o id do usuario
+  gid_t idGrupo;       // Variavel para armazenar o id do grupo do usuario.
 
-  long memTotal;
-  long memDisp;
-  int tamPagina;
+  char dirTrabalho[100]; // String para armazenar o diretorio de trabalho.
 
-  double carga[Nelem];
+  int politEscal; // Variavel para armazenar informacoes sobre o escalonamento.
 
-  char dirTrabalho[100];
-  char str[30];
-
-  int n;
-  int politicaEscalonamento;
-
-  struct utsname info;
-
-  puts("Programa para captura de informacoes sobre o processo.");
+  printf("Programa para captura de informacoes sobre o processo:\n");
 
   // Captura o id desse processo.
   idProcesso = getpid();
@@ -58,68 +43,29 @@ int main(void)
   // Captura o diretorio de trabalho desse processo
   getcwd(dirTrabalho, 99); 
 
-  puts("Informacoes sobre o processo:");
+  printf("Informacoes sobre o processo:\n");
   printf("\tO identificador do meu processo e: %d\n", idProcesso);
   printf("\tO identificador do meu processo pai e: %d\n", idProcessoPai);
   printf("\tO identificador de usuario desse processo e: %d\n", idUsuario);
   printf("\tO identificador de grupo desse processo e: %d\n", idGrupo);
   printf("\tO diretorio de trabalho eh: %s\n", dirTrabalho);
 
-  // Captura o tamanho da pagina
-  tamPagina = getpagesize();
-
-  /* Captura a quantidade de paginas de memoria a multiplica pelo 
-     tamanho da pagina */
-  memTotal = sysconf(_SC_PHYS_PAGES) * tamPagina;
-
-  /* Captura a quantidade de paginas de memoria disponiveis e
-     a multiplica pelo  tamanho da pagina */
-  memDisp = sysconf(_SC_AVPHYS_PAGES) * tamPagina;
-
-  puts("Informacoes sobre a memoria:");
-  printf("\tO tamanho da pagina e: %d (%.0f Kbytes)\n",
-	 tamPagina, tamPagina/Kbyte);
-  printf("\tO tamanho total da memoria: %ld (%f Mbytes)\n",
-	 memTotal, memTotal/Mbyte);
-  printf("\tO tamanho de memoria disponivel: %ld (%f Mbytes)\n",
-	 memDisp, memDisp/Mbyte);
-
-  // Captura a media de carga do sistema: numero de processos/tempo
-  n = getloadavg(carga,Nelem);
-  if (n > -1)
-  {
-    printf("Media de carga: \n");
-    printf("\t no ultimo minuto: %f\n",carga[0]);
-    printf("\t nos ultimos 5 minutos:%f\n",carga[1]);
-    printf("\t nos ultimos 15 minutos:%f\n",carga[2]);
-  }
-
   // Captura a politica de escalonamento utilizada pelo SO
-  politicaEscalonamento = sched_getscheduler(idProcesso);
+  politEscal = sched_getscheduler(idProcesso);
 
-  puts("A politica de escalonamento:");
-  switch(politicaEscalonamento)
+  printf("A politica de escalonamento: ");
+  switch(politEscal)
   {
-    case SCHED_FIFO: puts("\tPolitica FIFO");
+    case SCHED_FIFO: printf("Politica FIFO.\n");
       break;
-    case SCHED_RR: puts("\tPolitica RoundRobin");
+    case SCHED_RR: printf("Politica RoundRobin.\n");
       break;
-    case SCHED_OTHER: puts("\tPolitica default");
+    case SCHED_OTHER: printf("Politica default.\n");
       break;
-    default: puts("Erro!");
+    default: fprintf(stderr,"Erro!\n");
   }
 
-  // Captura informacoes sobre o sistema
-  uname(&info);
-
-  printf("Informacoes do sistema:\n");
-  printf("\tNome do S.O.: %s\n",info.sysname);
-  printf("\tRelease do S.O.: %s\n",info.release);
-  printf("\tVersao do S.O.: %s\n",info.version);
-  printf("\tHardware: %s\n",info.machine);
-  printf("\tNome do host:%s\n",info.nodename);
-
-  puts("Digite algo e tecle <enter> para encerrar.");
-  scanf("%s",str);
-  return 1;
+  printf("Pressione <enter> para sair do programa.\n");
+  getchar();
+  return 0;
 }

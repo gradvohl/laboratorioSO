@@ -1,5 +1,5 @@
 \chapter{Problema do Produtor-Consumidor}
-Um dos problemas discutidos em sala de aula é o do produtor-consumidor. Em linhas gerais, existem dois processos, um produtor e um consumidor, que competem pelo uso de um recurso (no caso um \textit{buffer}).
+Um dos problemas discutidos em sala de aula é o do produtor-consumidor. Em linhas gerais, existem dois processos (ou \textit{threads}), um produtor e um consumidor, que competem pelo uso de um recurso. Nesse caso um \textit{buffer}.
 
 O produtor gera dados e os armazena no \textit{buffer}. O consumidor, por sua vez, lê dados do buffer e os utiliza. A região crítica é o \textit{buffer}, pois apenas um dos processos deve estar utilizando o \textit{buffer} a cada instante. O sistema operacional deve prover meios de garantir essa exclusão mútua.
 
@@ -13,7 +13,7 @@ Observe as primitivas para inicializar semáforos (\texttt{sem\_init}), para exe
 Com base nessa explicação, observe o programa a seguir: 
 \lstinputlisting[style=MyCStyle]{./Programas/Semaforos/prod_cons.c}
 
-\section{Exercício}
+\subsection{Exercício}
 Antes de compilar o programa, mude para o diretório onde se encontra o arquivo \texttt{principal.c} , com o seguinte comando:
 
 \begin{lstlisting}[style=MyBashStyle]

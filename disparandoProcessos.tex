@@ -1,5 +1,8 @@
 \chapter{Disparando vários processos}
-A primitiva \texttt{fork()} é utilizada para, a partir de um processo, criar outro processo com as mesmas características do primeiro. Na verdade, a primitiva \texttt{fork()} faz uma cópia do processo pai em um processo filho, fazendo com que ambos continuem a sua execução do ponto imediatamente posterior à  primitiva \texttt{fork()}.
+Neste capítulo, veremos como criar processos a partir de outros processos utilizando as primitivas do sistema operacional.
+
+\section{Primitiva fork}
+A primitiva \texttt{fork()} é utilizada para, a partir de um processo, criar outro processo com o mesmo código e conteúdo de memória do primeiro. Na verdade, a primitiva \texttt{fork()} faz uma cópia do processo pai em um processo filho, fazendo com que ambos continuem a sua execução do ponto imediatamente posterior à  primitiva \texttt{fork()}.
 
 A primitiva \texttt{fork()} tem três saídas distintas:
 \begin{itemize}
@@ -13,13 +16,13 @@ Observe o programa a seguir e tente entender o funcionamento da primitiva \textt
 
 \lstinputlisting[style=MyCStyle]{./Programas/Processos/PaiFilho.c}
 
-\section{Exercício}
-Compile o programa anterior e execute-o.
+\subsection{Exercício}
+Neste exercício, compilaremos o programa anterior e o executaremos.
 
-Antes de compilar o programa, mude para o diretório onde se encontra o arquivo  \texttt{PaiFilho.c}, com o seguinte comando:
+Antes de compilar o programa, verifique se você está no diretório onde se encontra o arquivo  \texttt{PaiFilho.c}, com o seguinte comando:
 
 \begin{lstlisting}[style=MyBashStyle]
-cd../Processos
+ls PaiFilho.c
 \end{lstlisting}
 
 Para compilar o programa utilize o comando a seguir:
@@ -27,35 +30,34 @@ Para compilar o programa utilize o comando a seguir:
 gcc PaiFilho.c -o PaiFilho
 \end{lstlisting}
 
+Depois, execute o programa \texttt{./PaiFilho} e observe que dois processos serão criados. O processo Pai executará as linhas 47 a 51. Ao mesmo tempo, o processo filho executará as linhas 38 a 43.
 
 \section{Criando processos zumbis}
-Um processo zumbi é o processo que já terminou sua execução, mas que ainda está na tabela de processos por algum motivo. Um desses motivos é que, por algum \textit{bug} no sistema operacional, a tabela de processos ainda não foi atualizada, eliminando o identificador do processo.
+Um processo zumbi é o processo que já terminou sua execução, mas continua na tabela de processos por algum motivo. Um desses motivos é que, por algum \textit{bug} no sistema operacional, a tabela de processos ainda não foi atualizada, eliminando o identificador do processo.
 
-A princípio, um processo zumbi não é um problema sério para o sistema operacional. No entanto, a presença de zumbis pode indicar \textit{bugs} no sistema ou problemas de segurança do tipo \textit{Denial of service}.
-
-No exemplo a seguir, vamos forçar a criação de processos zumbis.
+A princípio, um processo zumbi não é um problema sério para o sistema operacional. No entanto, a presença de zumbis pode indicar \textit{bugs} no sistema ou problemas de segurança do tipo \textit{Denial of Service}. Para ilustrar, no exemplo a seguir, forçaremos a criação de processos zumbis.
 
 \lstinputlisting[style=MyCStyle]{./Programas/Processos/zumbi.c}
 
-\section{Exercício}
-Antes de compilar o programa \texttt{zumbi.c}, abra uma outra janela do terminal. Você precisará executar o comando \Comando{top} na segunda janela, enquanto o programa é executado na primeira.
+\subsection{Exercício}
+Antes de compilar o programa \texttt{zumbi.c}, abra outra janela do terminal. Você precisará executar o comando \Comando{top} na segunda janela, enquanto o programa é executado na primeira.
 
 Compile o programa \texttt{zumbi.c} com o seguinte comando:
 
 \begin{lstlisting}[style=MyBashStyle]
-gcc zumbi.c -o zumbi.o
+gcc zumbi.c -o zumbi
 \end{lstlisting}
 
-Agora, execute o programa \texttt{./zumbi.o} em uma janela e na outra execute o comando a seguir:
+Agora, execute o programa \texttt{./zumbi} em uma janela e na outra execute o comando a seguir:
 
 \begin{lstlisting}[style=MyBashStyle]
 top -p <id_pai> -p <id_filho>
 \end{lstlisting}
 
-Os valores para \texttt{<id\_pai>} e \texttt{<id\_filho>} serão fornecidos pelo programa \texttt{zumbi.o}.
+Os valores para \texttt{<id\_pai>} e \texttt{<id\_filho>} serão fornecidos pelo programa \texttt{zumbi} na primeira janela.
 
 \section{Processos pai e filho diferentes}
-A princípio, a primitiva \texttt{fork()} cria um processo filho exatamente igual ao seu processo pai. Entretanto, cada um deles fica em um espaço de memória diferente.
+A princípio, a primitiva \texttt{fork()} cria um processo filho exatamente igual ao seu processo pai. Entretanto, cada um deles fica em um espaço de endereços de memória diferente.
 
 Contudo, há situações em que é necessário que cada processo -- pai e filho -- execute códigos diferentes. No exemplo a seguir, ilustra-se a primitiva \texttt{execvp()} para executar programas diferentes a partir de um determinado processo. 
 
@@ -63,7 +65,7 @@ A primitiva \texttt{execvp()} faz parte de uma família de primitivas que substi
 
 A sintaxe da primitiva \texttt{execvp()} é a seguinte:
 
-\begin{lstlisting}[style=MyCStyle, frame=none]
+\begin{lstlisting}[style=MyCStyle, frame=none, numbers=none]
 int execvp(const char *file, char *const argv[]);
 \end{lstlisting}
  
@@ -83,13 +85,13 @@ onde:
  \section*{\texttt{filho.c}}
  \lstinputlisting[style=MyCStyle]{./Programas/Processos/filho.c}
  
- \section{Exercício}
+ \subsection{Exercício}
  Compile os programas \texttt{pai.c} e \texttt{filho.c} separadamente com os seguintes comandos:
 
 \begin{lstlisting}[style=MyBashStyle]
-gcc pai.c -o pai.o
-gcc filho.c -o filho.o
+gcc pai.c -o pai
+gcc filho.c -o filho
 \end{lstlisting}
 
 
-Agora execute o programa \texttt{./pai.o} e veja o resultado.
+Agora execute o programa \texttt{./pai} e veja o resultado.

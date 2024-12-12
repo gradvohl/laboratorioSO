@@ -1,6 +1,6 @@
 \chapter{Compartilhamento de memória}
 
-Conforme discutido em sala de aula, é possível fazer com que dois ou mais processos compartilhem memória. Essa é uma forma para fazer com que dois processos possam se comunicar.
+Conforme discutido em sala de aula, é possível fazer com que dois ou mais processos compartilhem memória. Essa é uma forma para estabelecer a comunicação entre dois processos que estão no mesmo espaço de endereçamento (memória). Veremos como compartilhar a memória de dois processos a seguir.
 
 \section{Primitivas para compartilhamento de memória}
 As primitivas usadas para fazer o compartilhamento e acesso são:
@@ -11,20 +11,23 @@ As primitivas usadas para fazer o compartilhamento e acesso são:
 \item \texttt{shmdt}: desanexa o segmento de memória compartilhado ao espaço de endereçamento do processo.
 \end{itemize}
 
-Observe o que os programas a seguir fazem. O primeiro é o programa \texttt{shm\_serv.c} que disponibiliza um segmento de memória. O segundo é o programa \texttt{shm\_cli.c} que acessa o segmento compartilhado.
+Observe o que os programas a seguir fazem. O primeiro é o programa \texttt{shm\_serv.c} que disponibilizará um segmento de memória que está no seu espaço de endereçamento. O segundo é o programa \texttt{shm\_cli.c} que acessará o segmento de memória compartilhado pelo primeiro processo.
+
+%Adicionado por questões estéticas - Remova se necessário.
+\clearpage
 
 \section*{\texttt{shm\_serv.c}}
 \lstinputlisting[style=MyCStyle]{./Programas/CompartMem/shm_serv.c}
 
-\newpage
+
 \section*{\texttt{shm\_cli.c}}
 \lstinputlisting[style=MyCStyle]{./Programas/CompartMem/shm_cli.c}
 
-\section{Exercício}
+\subsection{Exercício}
 
-Compile ambos os programas e, em seguida, execute em uma janela o programa  \texttt{shm\_serv} e em outra janela o programa \texttt{shm\_cli}.
+Primeiro, compile ambos os programas separadamente. Em seguida, abra duas janelas do terminal. Em uma das janelas execute o programa  \texttt{shm\_serv}. Na outra janela, execute o programa \texttt{shm\_cli}.
 
-Antes de compilar o programa, mude para o diretório onde se encontram os arquivos \texttt{shm\_serv.c} e \texttt{shm\_cli.c} , com o seguinte comando:
+Antes de compilar o programa, mude para o diretório onde se encontram os arquivos \texttt{shm\_serv.c} e \texttt{shm\_cli.c} com o seguinte comando:
 \begin{lstlisting}[style=MyBashStyle]
 cd ../CompartMem
 \end{lstlisting}
@@ -36,4 +39,13 @@ gcc shm_serv.c -o shm_serv
 gcc shm_cli.c -o shm_cli
 \end{lstlisting}
 
-Agora, em uma das janela execute primeiro o programa \texttt{./shm\_serv.o} e, depois, na segunda janela execute o programa \texttt{./shm\_cli.o}. Veja o resultado.
+Agora, em uma das janelas execute primeiro o programa \texttt{./shm\_serv}. Note que o programa ficará em execução, esperando a leitura dos dados pelo segundo programa.
+
+Depois, na segunda janela, execute o programa \texttt{./shm\_cli}. Veja o resultado.
+
+Reflita e responda às perguntas a seguir: 
+\begin{enumerate}
+    \item Que tipo de mecanismo de sincronização foi usado para fazer com que o programa \texttt{./shm\_serv} esperasse até que o programa \texttt{./shm\_cli} lesse os dados?
+    \item Em que linhas fica evidente o mecanismo de sincronização utilizado?
+\end{enumerate}
+    

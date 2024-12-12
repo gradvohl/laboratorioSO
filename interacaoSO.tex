@@ -2,7 +2,7 @@
 Neste capítulo, veremos alguns comandos básicos para a interação com o sistema operacional Linux. 
 
 \section{Interagindo com o sistema operacional}
-O comando básico para obter informações sobre o sistema operacional é o
+O comando básico para obter informações sobre o sistema operacional está a seguir.
 %\begin{center}  \texttt{uname -a} \end{center}
 
 \begin{lstlisting}[style=MyBashStyle]
@@ -25,6 +25,39 @@ Entre as informações presentes na saída desse comando estão:
 
 \subsection{Exercício}
 Utilize o comando \ComandoParametros{uname}{-a} em sua máquina e tente identificar a saída do comando.
+
+
+\subsection{Mais informações sobre a distribuição do sistema operacional}
+Outra possibilidade para obter mais informações sobre a distribuição do sistema operacional utilizado é consultar o arquivo \texttt{/etc/os-release}. Para isso use o comando a seguir.
+
+\begin{lstlisting}[style=MyBashStyle]
+cat /etc/os-release 
+\end{lstlisting}
+
+Observe a saída que o comando anterior produz.
+\begin{lstlisting}[style=outputStyle]
+NAME="Rocky Linux"
+VERSION="9.5 (Blue Onyx)"
+ID="rocky"
+ID_LIKE="rhel centos fedora"
+VERSION_ID="9.5"
+PLATFORM_ID="platform:el9"
+PRETTY_NAME="Rocky Linux 9.5 (Blue Onyx)"
+ANSI_COLOR="0;32"
+LOGO="fedora-logo-icon"
+CPE_NAME="cpe:/o:rocky:rocky:9::baseos"
+HOME_URL="https://rockylinux.org/"
+VENDOR_NAME="RESF"
+VENDOR_URL="https://resf.org/"
+BUG_REPORT_URL="https://bugs.rockylinux.org/"
+SUPPORT_END="2032-05-31"
+ROCKY_SUPPORT_PRODUCT="Rocky-Linux-9"
+ROCKY_SUPPORT_PRODUCT_VERSION="9.5"
+REDHAT_SUPPORT_PRODUCT="Rocky Linux"
+REDHAT_SUPPORT_PRODUCT_VERSION="9.5"
+\end{lstlisting}
+
+Dentre as informações apresentadas estão o nome da distrição Linux (nesse caso, \enquote{\texttt{Rocky Linux}}), a versão (\enquote{\texttt{9.5 (Blue Onyx)}}) e outros detalhes específicos da versão do sistema operacional utilizado.
 
 \section{Obtendo informações sobre o hardware}
 Para obter informações sobre o hardware no qual o sistema operacional está funcionando, utilizaremos dois comandos. 
@@ -52,4 +85,30 @@ Para informações mais completas sobre a memória do computador que você está
 \subsection{Exercício}
 Utilize o comando \Comando{lsmem} em sua máquina e tente identificar quais as informações esse comando fornece.
 
-Depois, use o comando \Comando{cat} \texttt{/proc/meminfo} e verifique que informações esse comando fornece. Compare a saída do comando \Comando{lsmem} com a saída desse comando.
+Depois, use o comando \semaspas{\Comando{cat} \texttt{/proc/meminfo}} e verifique que informações esse comando fornece. Compare a saída do comando \Comando{lsmem} com a saída desse comando.
+
+
+\section{Informações sobre o sistema por meio de um código-fonte}
+Todas as informações sobre o hardware, isto é, informações sobre CPU e memória podem ser obtidas por meio de um código-fonte. Para isso, observe o código fonte a seguir.
+
+\clearpage
+\lstinputlisting[style=MyCStyle]{./Programas/InfoSistema/infoSistema.c}
+
+\subsection{Exercício}
+Para ver o resultado do programa anterior, compile-o e execute-o. Antes de compilar o programa, mude para o diretório onde se encontra o arquivo  \texttt{infoSistema.c}, com o seguinte comando:
+
+\begin{lstlisting}[style=MyBashStyle]
+cd InfoSistema
+\end{lstlisting}
+
+Fique atento, pois o interpretador da linha de comando (o \textit{shell}) diferencia as letras maiúsculas das letras minúsculas.
+
+Para compilar o programa, utilize o comando a seguir.
+\begin{lstlisting}[style=MyBashStyle]
+gcc infoSistema.c -o infoSistema
+\end{lstlisting}
+
+Para executar o programa, execute a linha de comando a seguir.
+\begin{lstlisting}[style=MyBashStyle]
+./infoSistema
+\end{lstlisting}
