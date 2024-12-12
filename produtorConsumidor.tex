@@ -20,10 +20,9 @@ Antes de compilar o programa, mude para o diretório onde se encontra o arquivo 
 cd ../Semaforos
 \end{lstlisting}
 
-Compile o programa anterior com a seguinte linha de comando:
+Compile e execute o programa anterior com as seguintes linhas de comando:
 
 \begin{lstlisting}[style=MyBashStyle]
-gcc -lpthread prod_cons.c  -o prod_cons
+gcc -pthread prod_cons.c  -o prod_cons
+./prod_cons
 \end{lstlisting}
-
-Agora execute o programa \texttt{./prod\_cons} e veja o resultado.
