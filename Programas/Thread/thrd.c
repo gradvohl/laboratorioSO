@@ -30,6 +30,7 @@ int main( void )
  printf ("Meu Thread ID  = %lu\n",meutid);
 
  printf("Disparando Thread sub_a");
+
 /**
  * A funcao a seguir cria um thread (linha de execucao) para a funcao "sub_a".
  * O prototipo da funcao e:

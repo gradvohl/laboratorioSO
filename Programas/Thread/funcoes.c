@@ -13,6 +13,8 @@
 #include <pthread.h>
 #include "funcoes.h" // Cabecalho que contem o prototipo dessas funcoes
 
+
+
 /**
  * Funcao que implementa a thread sub_a.
  */ 
