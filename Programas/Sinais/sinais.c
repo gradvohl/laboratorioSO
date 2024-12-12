@@ -4,10 +4,10 @@
  *   Prof. Andre Leon S. Gradvohl, Dr.
  *
  * Ultima atualizacao:
- *   04/04/2019
+ *   12/12/2024
  *
  * Para compilar:
- *   gcc sinais.c -o sinais.o
+ *   gcc sinais.c -o sinais
  */
 #include <signal.h>
 #include <stdio.h>

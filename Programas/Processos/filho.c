@@ -7,12 +7,12 @@
  *   Prof. Andre Leon S. Gradvohl, Dr.
  *
  * Ultima atualizacao:
- *   02/04/2019
+ *   12/12/2024
  *
  * Para compilar:
- *   gcc filho.c -o filho.o
+ *   gcc filho.c -o filho
  *
- * Observacao: precisa que o programa pai.c esteja compilado.
+ * Observacao: Para executar, o programa pai.c deve estar compilado.
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
    unsigned int tempo=0;
    printf("Sou o novo processo filho.\n");
    printf("\tMeu id: %d. Id do processo pai: %d\n", 
-           getpid(), getppid());
+                     getpid(), getppid());
 
    if (argc == 2) // Se a quantidade de argumentos na linha de comando for 2.
    {

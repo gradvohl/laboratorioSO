@@ -6,7 +6,10 @@
  * http://www.cs.cf.ac.uk/Dave/C de David Marshall.
  *
  * Ultima atualizacao
- *   04/04/2019
+ *   12/12/2024
+ *
+ * Para compilar:
+ *   gcc shm_serv.c -o shm_serv
  */
 #include <stdio.h>
 #include <unistd.h>

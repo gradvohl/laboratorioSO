@@ -11,7 +11,10 @@
  * - funcoes.c
  *
  * Ultima atualizacao:
- *   04/04/2019
+ *   12/12/2024
+ *
+ * Para compilar:
+ *   gcc -pthread funcoes.c thrd.c -o thrd
  */
 #include <stdio.h>
 #include <unistd.h>  // Cabecalho para a funcao sleep
@@ -24,7 +27,7 @@ pthread_t outrosTIDs[2]; /* Vetor que armazena o id dos outros threads */
 int main( void )
 {
  meutid = pthread_self(); // Funcao que captura o id do thread.
- printf ("Meu Thread ID  = %ld\n",meutid);
+ printf ("Meu Thread ID  = %lu\n",meutid);
 
  printf("Disparando Thread sub_a");
 /**
@@ -40,17 +43,16 @@ int main( void )
  * A funcao retorna
  */
  pthread_create(&outrosTIDs[0], NULL, sub_a, NULL); 
- printf("(id = %ld)\n", outrosTIDs[0]);
+ printf("(id = %lu)\n", outrosTIDs[0]);
 
  printf("Disparando Thread sub_b");
-
 /**
  * A funcao a seguir cria um thread (linha de execucao) para a funcao "sub_b".
  */
  pthread_create(&outrosTIDs[1], NULL, sub_b, NULL);
- printf("(id = %ld)\n", outrosTIDs[1]);
+ printf("(id = %lu)\n", outrosTIDs[1]);
 
- printf("Aguardando finalizacao dos Threads id=%ld e id=%ld\n", 
+ printf("Aguardando finalizacao dos Threads id=%lu e id=%lu\n", 
         outrosTIDs[0], outrosTIDs[1]);
 
 /**
@@ -65,7 +67,7 @@ int main( void )
  */
  pthread_join(outrosTIDs[1], NULL);
  pthread_join(outrosTIDs[0], NULL);
- printf("Threads id=%ld e id=%ld finalizados\n", outrosTIDs[0], outrosTIDs[1]);
+ printf("Threads id=%lu e id=%lu finalizados\n", outrosTIDs[0], outrosTIDs[1]);
 
  return 1;
 }

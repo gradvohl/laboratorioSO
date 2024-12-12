@@ -6,7 +6,10 @@
  *   Prof. Andre Leon S. Gradvohl, Dr.
  *
  * Ultima atualizacao:
- *   04/04/2019
+ *   12/12/2024
+ *
+ * Para compilar:
+ *   gcc -pthread prod_cons.c -o prod_cons
  */
 #include <stdlib.h>
 #include <stdio.h>
@@ -56,7 +59,7 @@ int main(void)
      pthread_t thd0, thd1;
      /**
       * Incializa as threads
-      * 1o parametro: variavel thread
+      * 1o parametro: variavel com o identificador da thread
       * 2o parametro: indica se uma thread e "joinable", ou seja, se a thread 
       *               nao sera finalizada ate chegar a uma chamada de funcao
       *               pthread_join().
@@ -86,7 +89,7 @@ int produz_item()
 {
     int val;
     val = rand() % 100;
-    printf("\nProduzindo item: %d", val);
+    printf("\nProduzindo item: %d.", val);
     return val;
 }
 
@@ -95,7 +98,10 @@ int produz_item()
  */
 void consome_item(int item)
 {
-        printf("\nCosumindo item: %d", item);
+        printf("\nCosumindo item: %d.", item);
+
+	if (cont == 0)
+	   puts("\n############## Buffer vazio ##############");
 }
 
 //Metodo que a realiza a insercao do dado no buffer
@@ -111,8 +117,8 @@ void insere_item(int val)
          */ 
          proxPosVazia = (proxPosVazia + 1) % N;
          cont = cont + 1;
-         if(cont == N)
-             printf("\n############## Buffer completo ##############");
+	 if (cont == N)
+           puts("\n############## Buffer cheio ##############");
      }
 }
 

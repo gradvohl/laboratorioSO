@@ -5,7 +5,7 @@
  *   Prof. Andre Leon S. Gradvohl, Dr.
  *
  * Ultima atualizacao:
- *   04/04/2019
+ *   12/12/2024
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,6 +13,9 @@
 #include <pthread.h>
 #include "funcoes.h" // Cabecalho que contem o prototipo dessas funcoes
 
+/**
+ * Funcao que implementa a thread sub_a.
+ */ 
 void *sub_a(void *arg)
 {
   register int i=0;
@@ -27,6 +30,9 @@ void *sub_a(void *arg)
   pthread_exit(NULL);
 }
 
+/**
+ * Funcao que implementa a thread sub_b.
+ */
 void *sub_b(void *arg)
 {
   register int j=1;

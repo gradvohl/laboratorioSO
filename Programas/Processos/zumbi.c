@@ -1,14 +1,14 @@
 /**
- * Programa exemplo para ilustrar a existencia de processos zumbis.
+ * Programa exemplo para criar processos zumbis.
  *
  * Desenvolvido por:
  *   Prof. Andre Leon S. Gradvohl, Dr.
  *
  * Ultima atualizacao:
- *   02/04/2019
+ *   12/12/2024
  *
  * Para compilar:
- *   gcc zumbi.c -o zumbi.o
+ *   gcc zumbi.c -o zumbi
  *
  */  
 #include <stdio.h>

@@ -57,7 +57,7 @@ int main(void)
   printf("- Tempo desde a inicializacao do sistema: %lu segundos ou %.2f minutos\n", 
 		  infoMemoria.uptime, infoMemoria.uptime/60.0);
 
-  // Captura informacoes sobre o sistema
+  // Captura informacoes sobre o sistema operacional
   if (uname(&infoSistema) == -1)
   {
     fprintf(stderr, "Problemas na utilizacao da primitiva uname.\n");

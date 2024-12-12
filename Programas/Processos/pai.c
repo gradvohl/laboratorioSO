@@ -7,12 +7,12 @@
  *   Prof. Andre Leon S. Gradvohl, Dr.
  *
  * Ultima atualizacao:
- *   02/04/2019
+ *   12/12/2024
  *
  * Para compilar:
- *   gcc pai.c -o pai.o
+ *   gcc pai.c -o pai
  *
- * Observacao: precisa que o programa filho.c esteja compilado.
+ * Observacao: Para executar, o programa filho.c deve estar compilado.
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,7 +29,7 @@ int main(void)
   char *args[3];     // Lista de argumentos para o processo filho. 
 
   // Define os argumentos para o programa filho.
-  args[0] = "./filho.o"; // Nome do programa filho.
+  args[0] = "./filho"; // Nome do programa filho.
   args[1] = "2";         // Argumentos para o programa filho.
   args[2] = NULL;        // Indica o fim dos argumentos para o programa.
 
@@ -41,7 +41,7 @@ int main(void)
 
     /**
      * Substitui a imagem do filho pela imagem do programa 
-     * "filho.o", com os respectivos argumentos.
+     * "filho", com os respectivos argumentos.
      */
     execvp(args[0], args);
 

@@ -13,7 +13,10 @@
  * - auxFuncs.c
  *
  * Ultima atualizacao:
- *   11/08/2021
+ *   12/12/2024
+ * 
+ * Para compilar:
+ *   gcc -pthread auxFuncs.c mediaThreads.c -o mediaThreads
  */
 #include <stdio.h>
 #include <stdlib.h>
