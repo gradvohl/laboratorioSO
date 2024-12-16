@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Adição sobre utilização do comando "man" na introdução.
 - Adição de instruções sobre como utilizar o laboratório (clonando o repositorio)
 - Capitulo 2 Obtendo informações sobre o hardware, para obtenção de informações sobre CPU e memória tanto através de comandos quanto através do código.
+- Epílogo, com comentários finais.
 
 
 
