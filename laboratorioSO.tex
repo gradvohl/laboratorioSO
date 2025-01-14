@@ -51,7 +51,7 @@
 
 \title{Laboratório de Sistemas Operacionais}
 \author{Prof. André Leon S. Gradvohl, Dr.\\\href{mailto://gradvohl@unicamp.br}{gradvohl@unicamp.br}}
-\date{17 de junho de 2025}
+\date{30 de junho de 2025}
 
 \hypersetup{
     pdfstartview={XYZ null null .75}, %Abre a página em 100%
@@ -65,6 +65,20 @@
 
 \input{comandos.tex}
 
+%%%% Para acelerar o processo de compilacao
+\includeonly{%
+introducao,% <--- Adicione sempre o '%' logo após a vírgula.
+interacaoSO,%
+infoProcessos,%
+disparandoProcessos,%
+sinais,%
+compartilhamentoMemoria,%
+progMultithread,%
+sincronizacao,%
+epilogo,%
+licenca.tex%
+}
+
 \begin{document}
 
 \maketitle
@@ -72,24 +86,24 @@
 \setlength\parindent{0pt} %Sem identação no documento
 \setlength{\parskip}{1em} %espaço entre parágrafos
 
-\input{introducao}
+\include{introducao}
 
-\input{interacaoSO.tex}
+\include{interacaoSO}
 
-\input{infoProcessos}
+\include{infoProcessos}
 
-\input{disparandoProcessos.tex}
+\include{disparandoProcessos}
 
-\input{sinais.tex}
+\include{sinais}
 
-\input{compartilhamentoMemoria.tex}
+\include{compartilhamentoMemoria}
 
-\input{progMultithread.tex}
+\include{progMultithread}
 
-\input{produtorConsumidor.tex}
+\include{sincronizacao}
 
-\input{epilogo}
+\include{epilogo}
 
-\input{licenca.tex}
+\include{licenca.tex}
 
 \end{document}

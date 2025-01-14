@@ -28,6 +28,57 @@ Note que a função que implementa um \textit{thread} deve, obrigatoriamente, re
 
 A utilização do tipo \enquote{\mbox{\texttt{void *}}} possibilita ao programador a utilização de um endereço para qualquer tipo de dado. Contudo, para evitar que o compilador lance advertências, é preciso fazer uma conversão de tipos (\textit{cast}) para usar o conteúdo do endereço utilizado.
 
+\section{Sintaxe das principais primitivas na biblioteca PThreds}
+
+Nesta seção, detalharemos as sintaxes das principais primitivas citadas na seção anterior. A primeira dessas primitivas é a \texttt{pthread\_create}, cuja sintaxe é a seguinte:
+
+\begin{lstlisting}[style=MyCStyle, frame=none, numbers=none]
+    int pthread_create(pthread_t *restrict thread,
+                       const pthread_attr_t *restrict attr,
+                       void *(*start_routine)(void *),
+                       void *restrict arg);
+\end{lstlisting}
+ 
+onde: 
+\begin{itemize}
+    \item \texttt{thread} é o endereço da variável que armazenará o identificador do \textit{thread} criado.
+    \item \texttt{attr} são os atributos do \texttt{thread}. Aqui, a recomendação é utilizar \texttt{NULL} para o \textit{thread} ser criado com os atributos padrão. 
+    \item \texttt{start\_routine} é o nome da função que implementa o \textit{thread}.
+    \item \texttt{arg} é o endereço da variável que armazena os argumentos (parâmetros) para o thread. Se não houver parâmetros a passar, utilize \texttt{NULL}.
+ \end{itemize}
+
+A chamada à primitiva \texttt{pthread\_create} retorna zero caso não haja erro ou um código de erro (maior que zero), caso contrário.
+
+Por sua vez, a primitiva \texttt{pthread\_exit} é utilizada dentro da função que implementa o \textit{thread}. Essa primitiva é equivalente ao \texttt{return} no fim de uma função. A sintaxe é a seguinte:
+
+\begin{lstlisting}[style=MyCStyle, frame=none, numbers=none]
+       void pthread_exit(void *retval);
+\end{lstlisting}
+
+onde: 
+\begin{itemize}
+    \item \texttt{retval} contém o endereço da variável que armazena o valor ou valores de retorno do \textit{thread}.
+\end{itemize}
+
+Note que a variável que contém o valor ou valores de retorno precisa ser criada dinamicamente dentro do \textit{thread}. Afinal, variáveis locais deixam de existir quando a função encerra.
+
+Por fim, a primitiva \texttt{pthread\_join} é fundamental para sincronizar os \textit{threads} secundários com o \textit{thread} principal. Essa primitiva é implementa um mecanismo de sincronização \enquote{barreira}. Isso significa que o \textit{thread} que chamou a primitiva \texttt{pthread\_join} ficará bloqueado até que o \textit{thread} cujo identificador é indicado nos parâmetros da primitiva termine. 
+
+Aliás, essa é uma razão forte para usar a primitiva \texttt{pthread\_exit}, pois a utilização da primitiva \texttt{pthread\_exit} ao final de um \textit{thread} sinalizará, para outros \textit{threads} que aquele \textit{thread} terminou. A sintaxe da primitiva \texttt{pthread\_join} é a seguinte:
+
+\begin{lstlisting}[style=MyCStyle, frame=none, numbers=none]
+       int pthread_join(pthread_t thread, void **retval);
+\end{lstlisting}
+
+onde: 
+\begin{itemize}
+    \item \texttt{thread} é a variável que armazena o identificador do \textit{thread} cuja finalização se aguarda.
+    \item \texttt{retval} contém o endereço da variável que armazenará o valor ou valores de retorno do \textit{thread} cuja finalização se aguarda.
+\end{itemize}
+
+Note que a variável \texttt{retval} é do tipo \enquote{\texttt{void **}}. Isso significa que \texttt{retval} deve ser um ponteiro e, mesmo assim, é preciso passar o endereço desse ponteiro (com o caractere `\texttt{\&}').
+
+
 \section{Exemplo simples de utilização da biblioteca PThreads}
 Para ilustrar a utilização da biblioteca PThreads, começaremos com um exemplo muito simples. Observe o programa \texttt{thrd.c} a seguir. O programa dispara duas \textit{threads} que \enquote{dormem} um tempo aleatório. 
 
@@ -76,6 +127,7 @@ Como um exemplo de passagem de parâmetros, vejamos o exemplo a seguir. Trata-se
 Note, logo no início da função que especifica o \textit{thread}, como os dados são extraídos do parâmetro \texttt{args} e atribuídos às variáveis locais. Essa estratégia facilita o uso posterior das variáveis na função.
 
 Perceba também que a variável de retorno (\texttt{soma}) é um ponteiro. Esse ponteiro terá a memória alocada dinamicamente na função para que possa ser devolvida no final do \textit{thread}. 
+\clearpage %<-- Adicionado por questões estéticas.
 
 \section*{mediaThread.c}
 \lstinputlisting[style=MyCStyle]{./Programas/Thread/mediaThreads.c}

@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 
+// Funcao que tratara os sinais
 void trataSinal(int numSinal)
 {
   switch(numSinal)
@@ -37,7 +38,7 @@ void trataSinal(int numSinal)
 
 int main()
 {
-  //Registrando os sinais.
+  // Registrando as funcoes para tratamento dos sinais.
   signal(SIGINT, trataSinal);
   signal(SIGHUP, trataSinal);
   signal(SIGQUIT, trataSinal);

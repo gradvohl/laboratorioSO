@@ -1,0 +1,58 @@
+%\chapter{Problema do Produtor-Consumidor}
+\chapter{Sincronização}
+Quando escrevemos programas que envolvem processos ou \textit{threads} que cooperam para a solução de um problema, frequentemente precisamos utilizar mecanismos de sincronização. Os processos ou \textit{threads} são executados em diferentes velocidades de processamento devido a fatores como escalonamento, prioridades no uso dos núcleos de processamento, ou cargas de trabalho na CPU.  Assim, usar mecanismos de sincronização garantirá a exclusão mútua, isto é, a salvaguarda de que apenas um processo por vez utilizará um recurso compartilhado.
+
+Neste capítulo, vamos explorar a sincronização em programas \textit{multithread} utilizando a técnica de semáforos. Isso porque fica mais fácil o compartilhamento de variáveis (semáforos) que controlarão a sincronização. Importa destacar que também é possível realizar a sincronização entre processos -- ao invés de \textit{threads}. Contudo, os semáforos que controlarão a sincronização precisarão ser compartilhados previamente, usando compartilhamento de memória, por exemplo. 
+
+\section{Semáforos}
+
+Como discutido em aula, um semáforo é uma variável inteiras sobre a qual podem incidir as seguintes operações atômicas, isto é, indivisíveis:
+\begin{itemize}
+    \item Operação \textit{Down}: verifica se o valor do semáforo é maior que zero. Se for, decrementa o semáforo e o processo ou o \textit{thread} que chamou a Operação \texttt{Down} prossegue. Caso contrário, isto é, se o semáforo for zero, bloqueia o processo ou o \textit{thread} que chamou a Operação \texttt{Down}.
+    \item Operação \textit{Up}: Se houver algum processo bloqueado devido ao semáforo, desbloqueia o processo e mantém o semáforo com o valor zero. Caso não haja processos bloqueados, simplesmente incrementa o semáforo.
+\end{itemize}
+
+\subsection{Semáforos na biblioteca PThreads}
+Na biblioteca PThreads, os semáforos são variáveis do tipo \texttt{sem\_t}. Além disso, é preciso considerar que os semáforos são recursos do sistema operacional. Como tal, eles precisam ser inicializados.
+
+A primitiva utilizada para a inicialização de semáforos é a \texttt{sem\_init}. Ela recebe três parâmetros:
+\begin{itemize}
+    \item O endereço da variável semáforo que se deseja inicializar.
+    \item Uma indicação se o semáforo é compartilhado entre \textit{threads} (valor zero) ou entre processos (valor maior que zero). 
+    \item Valor inicial do semáforo (valor maior ou igual a zero).
+\end{itemize}
+
+A primitiva \texttt{sem\_init} retorna zero caso tudo tenha funcionado corretamente ou \texttt{-1}, caso contrário.
+
+Em relação às operações \textit{Down} e \textit{Up}, elas são implementadas nas primitivas \texttt{sem\_wait} e \texttt{sem\_post}, respectivamente. Ambas as primitivas recebem o endereço da variável semáforo como parâmetro. Como valor de retorno, ambas as primitivas retornam valor zero se tudo funcionou corretamente ou \texttt{-1}, caso contrário.
+
+
+%Existem várias formas de se resolver esse problema. Nesse laboratório serão mostradas duas delas. A primeira utilizando \textit{multithread} e uma estratégia chamada \texttt{mutex}. A segunda usando multiprocessamento e semáforos.
+
+\section{Problema do Produtor-Consumidor com \textit{multithreads} e semáforos}
+
+Um dos problemas clássicos de sincronização discutidos em sala de aula é o Problema do Produtor-Consumidor. Em linhas gerais, existem dois processos (ou \textit{threads}) -- um produtor e um consumidor -- que competem pelo uso de um recurso. Nesse caso um \textit{buffer}.
+
+O produtor gera dados e os armazena no \textit{buffer}. O consumidor, por sua vez, lê dados do buffer e os utiliza. A região crítica é o \textit{buffer}, pois apenas um dos processos deve estar utilizando o \textit{buffer} compartilhado a cada instante. O sistema operacional deve prover meios de garantir essa exclusão mútua.
+
+Para resolver o Problema do Produtor-Consumidor com multithreads serão criados três semáforos -- nomeados \texttt{mutex}, \texttt{vazio} e \texttt{cheio} -- conforme a solução vista em sala de aula.
+
+Com base nessa explicação, o programa \texttt{prod\_cons.c} a seguir apresenta uma solução. Observe a utilização das primitivas para inicializar semáforos (\texttt{sem\_init}), para executar a operação \textit{Down} (\texttt{sem\_wait}) e para executar a operação \textit{Up} (\texttt{sem\_post}).
+
+\clearpage % Adicionado por questões estéticas
+
+\lstinputlisting[style=MyCStyle]{./Programas/Semaforos/prod_cons.c}
+
+\subsection{Exercício}
+Antes de compilar o programa, mude para o diretório onde se encontra o arquivo \texttt{principal.c} , com o seguinte comando:
+
+\begin{lstlisting}[style=MyBashStyle]
+cd ../Semaforos
+\end{lstlisting}
+
+Compile e execute o programa anterior com as seguintes linhas de comando:
+
+\begin{lstlisting}[style=MyBashStyle]
+gcc -pthread prod_cons.c  -o prod_cons
+./prod_cons
+\end{lstlisting}

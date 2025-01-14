@@ -11,10 +11,55 @@ As primitivas usadas para fazer o compartilhamento e acesso são:
 \item \texttt{shmdt}: desanexa o segmento de memória compartilhado ao espaço de endereçamento do processo.
 \end{itemize}
 
+ Detalharemos a seguir a sintaxe das primitivas. A primitiva \texttt{shmget} tem a seguinte sintaxe:
+
+\begin{lstlisting}[style=MyCStyle, frame=none, numbers=none]
+    int shmget(key_t key, size_t size, int shmflg);
+\end{lstlisting}
+ 
+onde os parâmetros são os seguintes: 
+\begin{itemize}
+    \item \texttt{key} contém o rótulo para o identificador do segmento de memória que será compartilhado. Esse rótulo (\texttt{key}) deve ser conhecido por todos os processos envolvidos no compartilhamento de memória.
+    \item \texttt{size} é o tamanho do segmento a ser compartilhado, arredondado para o múltiplo do tamanho da página de memória\footnote{Veremos o conceito de \enquote{página de memória} quando abordarmos o assunto Memória Virtual.}.
+    \item \texttt{shmflg} é uma constante indicando o tipo de operação que será realizada.  Geralmente será \texttt{IPC\_CREAT} para informar que o segmento será criado.
+\end{itemize}
+     
+ O valor de retorno da primitiva \texttt{shmget} é o identificador do segmento de memória compartilhado indicado em \texttt{key}.
+
+ Por sua vez, a primitiva \texttt{shmat} usa a seguinte sintaxe:
+
+ \begin{lstlisting}[style=MyCStyle, frame=none, numbers=none]
+    void *shmat(int shmid, const void *_Nullable shmaddr, int shmflg);
+\end{lstlisting}
+ 
+onde os parâmetros são os seguintes: 
+\begin{itemize}
+    \item \texttt{shmid} o identificador do segmento de memória compartilhado. Esse identificador deve ser obtido com a primitiva (\texttt{shmget}) anterior.
+    \item \texttt{shmaddr} endereço ao qual o segmento de memória compartilhado será associado. Nesse caso, a recomendação é que se use \texttt{NULL} para o sistema operacional associar o segmento compartilhado ao endereço de memória mais adequado.
+    \item \texttt{shmflg} é uma constante indicando como a associação de memória será realizada.  Recomenda-se que se coloque o valor zero.
+\end{itemize}
+     
+ A primitiva \texttt{shmat} retorna o endereço do segmento de memória associado ou \texttt{-1} em caso de erro.
+
+
+ Por sua vez, a primitiva \texttt{shmdt} usa a seguinte sintaxe:
+
+ \begin{lstlisting}[style=MyCStyle, frame=none, numbers=none]
+       int shmdt(const void *shmaddr);
+\end{lstlisting}
+ 
+O parâmetro que a primitiva recebe é o seguinte: 
+\begin{itemize}
+    \item \texttt{shmaddr} endereço ao qual o segmento de memória compartilhado está associado.
+\end{itemize}
+     
+ A primitiva \texttt{shmdt} retorna zero, se tudo funcionou corretamente, ou \texttt{-1} em caso de erro.
+
+\section{Exemplo de compartilhamento de memória entre processos distintos}
 Observe o que os programas a seguir fazem. O primeiro é o programa \texttt{shm\_serv.c} que disponibilizará um segmento de memória que está no seu espaço de endereçamento. O segundo é o programa \texttt{shm\_cli.c} que acessará o segmento de memória compartilhado pelo primeiro processo.
 
 %Adicionado por questões estéticas - Remova se necessário.
-\clearpage
+%\clearpage
 
 \section*{\texttt{shm\_serv.c}}
 \lstinputlisting[style=MyCStyle]{./Programas/CompartMem/shm_serv.c}

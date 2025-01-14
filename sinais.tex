@@ -78,7 +78,23 @@ kill -s KILL <pid>
 \section{Interceptação de sinais via processo}
 Utilizando comandos específicos, os processos podem interceptar alguns sinais enviados a eles a partir do sistema operacional. Isso pode ser útil quando o processo quer tratar esses sinais, antes que o sistema operacional os trate definitivamente.
 
+Para interceptar os sinais que um processo recebe, é necessário criar uma função específica que será invocada quando um determinado sinal foi enviado a um processo. Além disso, é preciso informar ao sistema operacional qual será a função chamada quando houver o envio daquele sinal para o processo. Chamamos esse procedimento de \enquote{registrar o tratamento dos sinais}.
+
+Para registrar qual a função que será chamada para tratar um sinal específico utilizaremos a primitiva \texttt{signal}, cuja sintaxe é a seguinte, de acordo com o manual:
+
+\begin{lstlisting}[style=MyCStyle, frame=none, numbers=none]
+   void (*signal(int sig, void (*func)(int)))(int);
+\end{lstlisting}
+
+Apesar dessa sintaxe incomum, podemos simplificar para a seguinte sintaxe:
+\begin{lstlisting}[style=MyCStyle, frame=none, numbers=none]
+   void signal(int sig, funcao);
+\end{lstlisting}
+onde o primeiro parâmetro é o sinal que se deseja interceptar, dentre aqueles da \Cref{tab:sinais}. O segundo parâmetro é a função que tratará o sinal interceptado.
+
 No programa \texttt{sinais.c} a seguir, veremos como interceptar os sinais enviados a esse processo. Para isso, será criado um procedimento específico chamado \texttt{trataSinal} que será responsável pela interceptação e tratamento de alguns sinais.
+
+\clearpage %adicionado por questões estéticas.
 
 \lstinputlisting[style=MyCStyle]{./Programas/Sinais/sinais.c}
 

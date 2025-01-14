@@ -11,7 +11,6 @@
  * Para compilar:
  *   gcc -pthread prod_cons.c -o prod_cons
  */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <pthread.h>
@@ -25,7 +24,7 @@ sem_t vazio; // Semaforo para controlar as posicoes vazias no buffer
 sem_t cheio; // Semaforo para controlar as posicoes preenchidas no buffer
 sem_t mutex; // Semaforo binario para garantir exclusao mutua na regiao critica
 
-int buffer[N]; // Armazena os dados produzidos ou consumidos
+int buffer[N];    // Armazena os dados produzidos ou consumidos
 int proxPosCheia; // Proxima posicao cheia
 int proxPosVazia; // Proxima posicao vazia
 int cont;         // Controla a quantidade de dados presentes no buffer
@@ -45,7 +44,7 @@ int main(void)
 
     /**
      * Inicializa os semaforos
-     * 1o parametro: variavel semaforo
+     * 1o parametro: endereco da variavel semaforo
      * 2o parametro: indica se um semaforo sera compartilhado entre as threads 
      *               de um processo ou entre processos o valor 0 indica que o 
      *               semaforo sera compartilhado entre as threads de um processo 
@@ -53,7 +52,7 @@ int main(void)
      *               detalhes)
      * 3o parametro: valor inicial do semaforo
      */
-     sem_init(&mutex, 0 , 1);
+     sem_init(&mutex, 0, 1);
      sem_init(&vazio, 0, N);
      sem_init(&cheio, 0, 0);
 
@@ -63,14 +62,14 @@ int main(void)
       * 1o parametro: variavel com o identificador da thread
       * 2o parametro: indica se uma thread e "joinable", ou seja, se a thread 
       *               nao sera finalizada ate chegar a uma chamada de funcao
-      *               pthread_join().
-      * 3o parametro: indica o nome do metodo que ira compor o trecho de codigo 
-      *               q/ sera executado pela thread
-      * 4o parametro: utilizado qdo se necessita passar algum paramentro a thread. 
-      *               Pode se passar quaisquer tipos de dados, inclusive uma 
-      *               estrutura de dados qdo houver a necessidade de passar mais 
-      *               de um parametroi (dentro do metodo chamado realiza-se um 
-      *               "cast" p/ recuperar os dados)
+      *               pthread_join()
+      * 3o parametro: indica o nome da funcao com o trecho de codigo que sera
+      *               executado pela thread
+      * 4o parametro: utilizado quando precisa passar algum paramentro a thread. 
+      *               Pode passar quaisquer tipos de dados como parametros, inclusive 
+      *               uma estrutura de dados quando houver a necessidade de passar  
+      *               mais de um parametro (dentro da funcao chamada realiza-se um 
+      *               "cast" para recuperar os dados)
       */
       pthread_create(&thd0, 0, (void *) produtor, NULL);
       pthread_create(&thd1, 0, (void *) consumidor, NULL);
@@ -85,7 +84,7 @@ int main(void)
       exit(0);
 }
 
-// Metodo que produz os itens q/ serao inseridos no buffer (numeros aleatorios)
+// Funcao que produz os itens que serao inseridos no buffer (numeros aleatorios)
 int produz_item()
 {
     int val;
@@ -94,8 +93,8 @@ int produz_item()
     return val;
 }
 
-/* Metodo utilizado p/ mostra o valor q foi consumido 
- * (meramente implementado p/ fins didaticos)
+/* Funcao utilizada para mostrar o valor q foi consumido 
+ * (implementada meramente para fins didaticos)
  */
 void consome_item(int item)
 {
@@ -105,7 +104,7 @@ void consome_item(int item)
 	   puts("\n############## Buffer vazio ##############");
 }
 
-//Metodo que a realiza a insercao do dado no buffer
+//Funcao que a realiza a insercao do dado no buffer
 void insere_item(int val)
 {
     if(cont < N)
@@ -123,7 +122,7 @@ void insere_item(int val)
      }
 }
 
-// Metodo que realiza a retirada do dado do buffer
+// Funcao que realiza a retirada do dado do buffer
 int remove_item()
 {
     int val;
@@ -136,6 +135,8 @@ int remove_item()
     return val;
 }
 
+
+// Implementacao do thread para o produtor.
 void *produtor(void *p_arg)
 {
     int item;
@@ -159,6 +160,7 @@ void *produtor(void *p_arg)
     pthread_exit(NULL);
 }
 
+// Implementacao do thread para o consumidor.
 void *consumidor(void *p_arg)
 {
     int item;

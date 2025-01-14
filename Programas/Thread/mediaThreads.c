@@ -57,7 +57,7 @@ void *thrdSomaParcial(void *args)
   for (i=inicio; i<=final; i++)
      *soma += vetor[i];
 
-  return ((void *) soma);
+  pthread_exit((void *) soma);
 }
 
 /**
